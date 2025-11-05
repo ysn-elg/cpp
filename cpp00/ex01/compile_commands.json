@@ -1,0 +1,7 @@
+[
+  {"directory": "/home/yel-guad/Desktop/cpp/cpp00/ex01", "command": "g++ -std=c++98 -Wall src/Contact.cpp", "file": "src/Contact.cpp"}
+,
+  {"directory": "/home/yel-guad/Desktop/cpp/cpp00/ex01", "command": "g++ -std=c++98 -Wall src/main.cpp", "file": "src/main.cpp"}
+,
+  {"directory": "/home/yel-guad/Desktop/cpp/cpp00/ex01", "command": "g++ -std=c++98 -Wall src/PhoneBook.cpp", "file": "src/PhoneBook.cpp"}
+]

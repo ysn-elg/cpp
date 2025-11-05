@@ -1,5 +1,4 @@
 #include "PhoneBook.hpp"
-#include <iostream>
 
 std::string trim(const std::string& str, const std::string& set)
 {
@@ -14,18 +13,19 @@ std::string trim(const std::string& str, const std::string& set)
 
 int main()
 {
+    PhoneBook   pb;
     std::string command;
 
     while(true)
     {
         std::cout << "Enter a command: ";
-        if (!std::getline(std::cin, command))
+        if (!std::getline(std::cin, command)) // ctrl + D prblm
             break;
         command = trim(command, " \t\v\f\r");
         if (command == "ADD")
-            std::cout << "you have selected 'ADD'\n";
+            pb.addContact();
         else if (command == "SEARCH")
-            std::cout << "you have selected 'SEARCH'\n";
+            pb.searchContacts();
         else if (command == "EXIT")
             break;
         else if (command.empty())
