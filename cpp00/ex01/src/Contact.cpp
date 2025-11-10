@@ -8,7 +8,7 @@ void    Contact::setNickName(const std::string& name)       { nickName = name; }
 
 void    Contact::setPhoneNumber(const std::string& number)  { phoneNumber = number; }
 
-void    Contact::setDarkSecret(const std::string& secret)   { darkSecret = secret; }
+void    Contact::setDarkestSecret(const std::string& secret)   { darkestSecret = secret; }
 
 std::string Contact::getFirstName() const   { return firstName; }
 
@@ -18,5 +18,5 @@ std::string Contact::getNickName() const    { return nickName; }
 
 std::string Contact::getPhoneNumber() const { return phoneNumber; }
 
-std::string Contact::getDarkSecret() const  { return darkSecret; }
+std::string Contact::getDarkestSecret() const  { return darkestSecret; }
 
