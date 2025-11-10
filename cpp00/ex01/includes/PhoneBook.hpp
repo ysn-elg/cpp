@@ -13,7 +13,7 @@ class PhoneBook
     private:
         Contact contacts[8];
         int     storedCount;
-
+        int     lastContact;
     public:
         PhoneBook();
         void    addContact();

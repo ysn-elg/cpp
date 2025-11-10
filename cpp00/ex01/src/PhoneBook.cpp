@@ -2,7 +2,9 @@
 #include <functional> // for declare function as a prameter
 #include <cstdlib> // for exit function
 
-PhoneBook::PhoneBook() : storedCount(-1) { }
+PhoneBook::PhoneBook()
+    : storedCount(-1), lastContact(-1)
+{ }
 
 int setData(const std::string& msg, void (Contact::*func)(const std::string&), Contact& obj)
 {
@@ -25,12 +27,16 @@ void    PhoneBook::addContact()
 {
     std::string tmp;
     
-    storedCount = (storedCount + 1) % 8;
-    setData("   First name: ", &Contact::setFirstName, contacts[storedCount]); // check typing
-    setData("   Last name: ", &Contact::setLastName, contacts[storedCount]);
-    setData("   Nick name: ", &Contact::setNickName, contacts[storedCount]); // the [&] !!?
-    setData("   Phone number: ", &Contact::setPhoneNumber, contacts[storedCount]);
-    setData("   Darkest secret: ", &Contact::setDarkestSecret, contacts[storedCount]);
+    lastContact = (lastContact + 1) % 8;
+    storedCount++;
+    if (storedCount >= 8 )
+        storedCount = 7;
+    //storedCount = std::min(storedCount++, 7);
+    setData("   First name: ", &Contact::setFirstName, contacts[lastContact]); // check typing
+    setData("   Last name: ", &Contact::setLastName, contacts[lastContact]);
+    setData("   Nick name: ", &Contact::setNickName, contacts[lastContact]); // the [&] !!?
+    setData("   Phone number: ", &Contact::setPhoneNumber, contacts[lastContact]);
+    setData("   Darkest secret: ", &Contact::setDarkestSecret, contacts[lastContact]);
 }
 
 // |-------------------------------------------|
@@ -51,13 +57,12 @@ std::string    formatField(const std::string& str)
 
 void    displayContact(Contact C, int index)
 {
-    std::cout << "|-------------------------------------------|" << std::endl;
     std::cout << "|" << std::setw(10) << index; 
     std::cout << "|" << std::setw(10) << formatField(C.getFirstName());
     std::cout << "|" << std::setw(10) << formatField(C.getLastName());
     std::cout << "|" << std::setw(10) << formatField(C.getNickName());
     std::cout << "|" << std::endl;
-    // std::cout << "----------------------------------------------" << endl;
+    std::cout << "|-------------------------------------------|" << std::endl;
 }
 
 int    chooseIndex()
@@ -72,17 +77,26 @@ int    chooseIndex()
         index = trim(index, " \t\v\f\r");
         if (!index.empty() && std::isdigit(index[0]) && index.length() == 1)
             return (index[0] - '0');
+        if (!index.empty())
+            break;
     }
-    return -1;
+    return 8;
 }
 
 void    printContact(Contact C)
 {   
-   std::cout << "First name: " << C.getFirstName() << std::endl;
-   std::cout << "Last name: " << C.getLastName() << std::endl;
-   std::cout << "Nick name: " << C.getNickName() << std::endl ;
-   std::cout << "Phone number: " << C.getPhoneNumber() << std::endl;
-   std::cout << "Darkest secret: " << C.getDarkestSecret() << std::endl;
+   std::cout << "   First name: " << C.getFirstName() << std::endl;
+   std::cout << "   Last name: " << C.getLastName() << std::endl;
+   std::cout << "   Nick name: " << C.getNickName() << std::endl ;
+   std::cout << "   Phone number: " << C.getPhoneNumber() << std::endl;
+   std::cout << "   Darkest secret: " << C.getDarkestSecret() << std::endl;
+}
+
+void    printTableHead()
+{
+    std::cout << "|-------------------------------------------|" << std::endl;
+    std::cout << "|     index|first name| last name|  nickname|" << std::endl;
+    std::cout << "|-------------------------------------------|" << std::endl;
 }
 
 void    PhoneBook::searchContacts()
@@ -92,14 +106,12 @@ void    PhoneBook::searchContacts()
         std::cout << "PhoneBook is empty" << std::endl;
         return ; //todo: 
     }
+    printTableHead();
     for (int i = 0; i <= storedCount; i++)
         displayContact(contacts[i], i);
-    int index = chooseIndex();
-    while (index > storedCount)
-    {
-        std::cout << "invalid index !!" << std::endl;
-        index = chooseIndex();
-    }
-    printContact(contacts[chooseIndex()]);
+    int index;
+    while ((index = chooseIndex()) > storedCount)
+        std::cout << "Invalid index!!" << std::endl; 
+    printContact(contacts[index]);
 }
 
