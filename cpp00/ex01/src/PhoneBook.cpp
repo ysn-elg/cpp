@@ -3,7 +3,7 @@
 #include <cstdlib> // for exit function
 
 PhoneBook::PhoneBook()
-    : storedCount(-1), lastContact(-1)
+    : storedCount(0), lastContact(-1)
 { }
 
 int setData(const std::string& msg, void (Contact::*func)(const std::string&), Contact& obj)
@@ -29,8 +29,8 @@ void    PhoneBook::addContact()
     
     lastContact = (lastContact + 1) % 8;
     storedCount++;
-    if (storedCount >= 8 )
-        storedCount = 7;
+    if (storedCount > 8 )
+        storedCount = 8;
     //storedCount = std::min(storedCount++, 7);
     setData("   First name: ", &Contact::setFirstName, contacts[lastContact]); // check typing
     setData("   Last name: ", &Contact::setLastName, contacts[lastContact]);
@@ -107,10 +107,10 @@ void    PhoneBook::searchContacts()
         return ; //todo: 
     }
     printTableHead();
-    for (int i = 0; i <= storedCount; i++)
+    for (int i = 0; i < storedCount; i++)
         displayContact(contacts[i], i);
     int index;
-    while ((index = chooseIndex()) > storedCount)
+    while ((index = chooseIndex()) >= storedCount)
         std::cout << "Invalid index!!" << std::endl; 
     printContact(contacts[index]);
 }

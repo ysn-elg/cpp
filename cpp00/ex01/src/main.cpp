@@ -16,6 +16,7 @@ int main()
     PhoneBook   pb;
     std::string command;
 
+    std::cout << "Available commands 'ADD', 'SEARCH' and EXIT." << std::endl; 
     while(true)
     {
         std::cout << "Enter a command: ";
@@ -31,7 +32,7 @@ int main()
         else if (command.empty())
             continue;
         else
-            std::cout << command << ": invalid command! try 'ADD', 'SEARCH' or 'EXIT'.\n";
+            std::cout << command << ": invalid command! try 'ADD', 'SEARCH' or 'EXIT'." << std::endl;
     }
     return 0;
 }

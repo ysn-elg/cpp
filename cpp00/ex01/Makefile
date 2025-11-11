@@ -1,4 +1,4 @@
-NAME        = phonebook
+NAME        = PhoneBook
 
 CXX         = c++
 CXXFLAGS    = -Wall -Wextra -Werror -std=c++98 -g
@@ -23,7 +23,6 @@ $(NAME): $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)[OK]$(RESET) $(NAME) built successfully!"
 
-# Compile .cpp -> .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	@$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 	@echo "$(YELLOW)Compiling:$(RESET) $<"
