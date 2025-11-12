@@ -1,3 +1,7 @@
+#extra files
+*.check
+PhoneBook
+
 # Prerequisites
 *.d
 

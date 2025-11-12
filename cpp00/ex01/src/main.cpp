@@ -16,7 +16,7 @@ int main()
     PhoneBook   pb;
     std::string command;
 
-    std::cout << "Available commands 'ADD', 'SEARCH' and EXIT." << std::endl; 
+    std::cout << "Available commands 'ADD', 'SEARCH' and 'EXIT'." << std::endl; 
     while(true)
     {
         std::cout << "Enter a command: ";

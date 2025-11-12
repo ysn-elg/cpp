@@ -2,9 +2,9 @@
 #include <functional> // for declare function as a prameter
 #include <cstdlib> // for exit function
 
-PhoneBook::PhoneBook()
-    : storedCount(0), lastContact(-1)
-{ }
+//PhoneBook::PhoneBook()
+  //  : storedCount(0), lastContact(-1)
+//{ }
 
 int setData(const std::string& msg, void (Contact::*func)(const std::string&), Contact& obj)
 {
