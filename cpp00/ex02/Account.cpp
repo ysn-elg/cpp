@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Account.hpp"
 
 int Account::_nbAccounts = 0;
@@ -61,7 +62,7 @@ void    Account::makeDeposit( int deposit )
     _displayTimestamp();
     std::cout << "index:" << _accountIndex
               << ";p_amount:" << previousAmount
-              << ";deposits:" << deposit
+              << ";deposit:" << deposit
               << ";amount:" << _amount
               << ";nb_deposits:" << _nbDeposits
               << std::endl;
