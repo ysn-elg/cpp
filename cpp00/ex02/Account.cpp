@@ -14,7 +14,7 @@ int	Account::getNbWithdrawals( void ) { return _totalNbWithdrawals; }
 
 Account::Account( void ) {}
 
-void  Account::_displayTimestamp( void ) {
+void  Account::_displayTimestamp( void ) { // should I change it to current date
     std::cout << "[19920104_091532] ";
 }
 
