@@ -2,6 +2,7 @@
 #define   WEAPON_HPP 
 
 # include <string>
+# include "Weapon.hpp"
 
 class Weapon {
 
@@ -9,7 +10,6 @@ class Weapon {
         std::string _type;
 
     public:
-        Weapon( void );
         Weapon(const std::string& t);
         ~Weapon( void );
 

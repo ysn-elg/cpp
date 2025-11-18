@@ -1,43 +1,36 @@
-NAME	= unecessary_violence
+NAME		= UnnecessaryViolence
 
-CC		= c++
-CFLAGS	= -Werror -Wextra -Wall -std=c++98
+CXX			= c++
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-INC_PATH	= ./includes/
-INC			= -I $(INC_PATH)
+SRCS		= main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
-SRC_PATH	= ./sources/
-SRC			= 	main.cpp \
-				HumanA.cpp \
-				HumanB.cpp \
-				Weapon.cpp
-SRCS		= $(addprefix $(SRC_PATH), $(SRC))
+OBJ_DIR		= objs
+OBJS		= $(addprefix $(OBJ_DIR)/,$(SRCS:.cpp=.o))
 
-OBJ_PATH	= ./objects/
-OBJS		= $(addprefix $(OBJ_PATH), $(SRC:.cpp=.o))
+GREEN       = \033[1;32m
+YELLOW      = \033[1;33m
+RED         = \033[1;31m
+RESET       = \033[0m
 
-# Build rule
-all: $(OBJ_PATH) $(NAME)
+all: $(NAME)
 
-# Object build rule
-$(OBJ_PATH):
-	mkdir -p $(OBJ_PATH)
-
-$(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-
-# Program build rule
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(INC)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-# Clean rules
+$(OBJ_DIR)/%.o:%.cpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR) #-p avoid errors
+
 clean:
-	rm -rf $(OBJ_PATH)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
-# Remake
 re: fclean all
 
-.PHONY: all re clean fclean
+.PHONY: all clean fclean re
+

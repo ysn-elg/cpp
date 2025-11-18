@@ -3,6 +3,7 @@
 
 # include <string>
 # include "Weapon.hpp"
+# include <iostream>
 
 class	HumanA
 {
@@ -14,7 +15,7 @@ class	HumanA
 		HumanA( std::string const name, Weapon const &weapon );
 		~HumanA( void );
 
-		void	attack( void ) const; // without angle bracket ?
+		void	attack( void ) const; 
 };
 
 #endif
