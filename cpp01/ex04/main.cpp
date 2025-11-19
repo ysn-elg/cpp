@@ -5,7 +5,7 @@
 int main (int ac, char *av[])
 {
     if (ac != 4) {
-        std::cerr << "Usage: " << av[0]<< "<fileName> <s1> <s2>" << std::endl;
+        std::cerr << "Usage: " << av[0]<< " <fileName> <s1> <s2>" << std::endl;
         return 1;
     }
 

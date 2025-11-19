@@ -32,3 +32,5 @@ fclean: clean
 	@echo "$(RED)[FCLEAN]$(RESET) Executable removed."
 
 re: clean fclean all
+
+.PHONY: all clean fclean re
