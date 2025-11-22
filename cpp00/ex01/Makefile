@@ -1,7 +1,7 @@
 NAME        = PhoneBook
 
 CXX         = c++
-CXXFLAGS    = -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS    = -Wall -Wextra -Werror -std=c++98 #-g
 
 SRC_DIR     = src
 INC_DIR     = includes
@@ -21,7 +21,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
-	@echo "$(GREEN)[OK]$(RESET) $(NAME) built successfully!"
+	@echo "Executable $(GREEN)$(NAME)$(RESET) built successfully!"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	@$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@

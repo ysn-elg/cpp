@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Account.hpp"
+#include <ctime>
+#include <iomanip>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -14,8 +16,13 @@ int	Account::getNbWithdrawals( void ) { return _totalNbWithdrawals; }
 
 Account::Account( void ) {}
 
-void  Account::_displayTimestamp( void ) { // should I change it to current date
-    std::cout << "[19920104_091532] ";
+void Account::_displayTimestamp(void)
+{
+    std::time_t now = std::time(NULL);
+    std::tm tm = *std::localtime(&now);
+    char buf[19];
+    std::strftime(buf, sizeof(buf), "[%Y%m%d_%H%M%S] ", &tm);
+    std::cout << buf;
 }
 
 Account::Account( int initial_deposit )
@@ -32,7 +39,6 @@ Account::Account( int initial_deposit )
               << ";created" << std::endl;
 }
 
-// Destructor
 Account::~Account( void ) {
     _displayTimestamp();
     std::cout << "index:" << _accountIndex

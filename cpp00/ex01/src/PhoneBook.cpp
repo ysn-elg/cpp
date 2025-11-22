@@ -1,10 +1,4 @@
 #include "PhoneBook.hpp"
-#include <functional> // for declare function as a prameter
-#include <cstdlib> // for exit function
-
-//PhoneBook::PhoneBook()
-  //  : storedCount(0), lastContact(-1)
-//{ }
 
 int setData(const std::string& msg, void (Contact::*func)(const std::string&), Contact& obj)
 {
@@ -28,24 +22,14 @@ void    PhoneBook::addContact()
     std::string tmp;
     
     lastContact = (lastContact + 1) % 8;
-    storedCount++;
-    if (storedCount > 8 )
-        storedCount = 8;
-    //storedCount = std::min(storedCount++, 7);
-    setData("   First name: ", &Contact::setFirstName, contacts[lastContact]); // check typing
+    storedCount = std::min(storedCount + 1, 8);
+
+    setData("   First name: ", &Contact::setFirstName, contacts[lastContact]);
     setData("   Last name: ", &Contact::setLastName, contacts[lastContact]);
-    setData("   Nick name: ", &Contact::setNickName, contacts[lastContact]); // the [&] !!?
+    setData("   Nick name: ", &Contact::setNickName, contacts[lastContact]);
     setData("   Phone number: ", &Contact::setPhoneNumber, contacts[lastContact]);
     setData("   Darkest secret: ", &Contact::setDarkestSecret, contacts[lastContact]);
 }
-
-// |-------------------------------------------|
-// |     Index|First name| Last name|  Nickname|
-// |-------------------------------------------|
-// |         0|   Yassine|El guaddar| Wayassine|
-// |-------------------------------------------|
-// |         1|AAAAAAAAA.|sssssssss.|ddddddddd.|
-// |-------------------------------------------|
 
 std::string    formatField(const std::string& str)
 {
@@ -53,6 +37,13 @@ std::string    formatField(const std::string& str)
         return str.substr(0, 9) + ".";
     else
         return str;
+}
+
+void    printTableHead()
+{
+    std::cout << "|-------------------------------------------|" << std::endl;
+    std::cout << "|     index|first name| last name|  nickname|" << std::endl;
+    std::cout << "|-------------------------------------------|" << std::endl;
 }
 
 void    displayContact(Contact C, int index)
@@ -92,19 +83,13 @@ void    printContact(Contact C)
    std::cout << "   Darkest secret: " << C.getDarkestSecret() << std::endl;
 }
 
-void    printTableHead()
-{
-    std::cout << "|-------------------------------------------|" << std::endl;
-    std::cout << "|     index|first name| last name|  nickname|" << std::endl;
-    std::cout << "|-------------------------------------------|" << std::endl;
-}
 
 void    PhoneBook::searchContacts()
 {
-    if (storedCount < 0)
+    if (storedCount <= 0)
     {
         std::cout << "PhoneBook is empty" << std::endl;
-        return ; //todo: 
+        return ;
     }
     printTableHead();
     for (int i = 0; i < storedCount; i++)

@@ -2,11 +2,12 @@
 #define PHONEBOOK_HPP
 
 #include <iostream>
-#include <string> // for isdigit!?
+#include <string> 
 #include "Contact.hpp"
-#include <iomanip> // for setw
+#include <iomanip>
+#include <cstdlib>
 
-std::string trim(const std::string&, const std::string&); // create new header file for utils ?
+std::string trim(const std::string&, const std::string&);
 
 class PhoneBook 
 {
