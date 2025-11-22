@@ -17,7 +17,9 @@ int main (int ac, char *av[])
         return 1;
     }
 
-    std::ifstream file(fileName.c_str()); //?: .c_str
+    // std::ifstream = input file stream (from <fstream>).
+    // It is a C++ class used to read from files.
+    std::ifstream file(fileName.c_str()); 
     if (!file.is_open())
     {
         std::cerr << "Error opening file\n";

@@ -11,10 +11,9 @@ class Zombie {
 
     public:
         Zombie( void );
-        Zombie(const std::string& n);
         ~Zombie( void );
-
-        //void  setName(std::string name);
+        
+        void  setName(const std::string& n);
         void  announce( void );
 };
 
