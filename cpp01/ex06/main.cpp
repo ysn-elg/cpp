@@ -7,7 +7,7 @@ int main(int ac, char **av)
 
     if (ac != 2)
     {
-        std::cerr << av[0] << " <level>\n"
+        std::cerr << av[0] << " <levelName>\n"
                   << "Levels: (1) DEBUG, (2) INFO, (3) WARNING, (4) ERROR" << std::endl;
         return 1;
     }
