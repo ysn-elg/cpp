@@ -20,8 +20,8 @@ int main()
     while(true)
     {
         std::cout << "Enter a command: ";
-        if (!std::getline(std::cin, command)) 
-            return 1;
+        std::getline(std::cin, command); 
+         //   return 1;
         command = trim(command, " \t\v\f\r");
         if (command == "ADD")
             pb.addContact();
