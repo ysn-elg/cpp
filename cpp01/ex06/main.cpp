@@ -21,7 +21,7 @@ int main(int ac, char **av)
     if (start == 4)
     {
         std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-            return 1;
+        return 1;
     }
     for (int i = start; i < 4; i++)
         harl.complain(levels[i]);

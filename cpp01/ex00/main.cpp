@@ -5,6 +5,6 @@ int main () {
     z->announce();
     delete z;
 
-    randomChump("ALLO!?");
+    randomChump("ALLO");
     return 0;
 }
