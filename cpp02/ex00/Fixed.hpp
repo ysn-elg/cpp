@@ -6,7 +6,7 @@
 class Fixed {
     private:
         int _number;
-        static const int _numOfFract;
+        static const int _bits;
     public:
         Fixed( void );
         Fixed(const Fixed &copy);

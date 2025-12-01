@@ -17,12 +17,16 @@ bool bsp( Point const a, Point const b, Point const c, Point const point)
 {
     if (point == a || point == b || point == c) 
         return false;
-    float epsilon = 0.00001f;
+    float epsilon = 0.0001f;
+
     float abc = getArea(a, b, c);
+    
     float abp = getArea(a, b, point);
     float apc = getArea(a, point, c);
     float pcb = getArea(point, b, c);
+    
     if (abp == 0 || apc == 0 || pcb == 0) 
         return false;
+    
     return std::abs(abc - (abp + apc + pcb)) < epsilon;
 }

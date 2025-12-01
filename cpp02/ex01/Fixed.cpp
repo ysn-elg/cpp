@@ -19,7 +19,6 @@ Fixed::Fixed(const float number) {
 Fixed::Fixed(const Fixed &copy) {
     std::cout << "Copy constructor called\n";
     *this = copy;
-    /* this->_number = copy._number; */
 }
 
 Fixed &Fixed::operator=(const Fixed &copy)
