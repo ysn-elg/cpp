@@ -1,14 +1,15 @@
-#ifndef   ClapTrap
-# define  ClapTrap
+#ifndef   CLAPTRAP_HPP
+# define  CLAPTRAP_HPP
 
-# inlcude <string>
+# include <string>
+# include <iostream>
 
 class ClapTrap {
     private:
         std::string _name;
-        int         _hitPoint;
-        int         _energy_point;
-        int         _attack_dammage;
+        int         _HP;
+        int         _EP;
+        int         _AD;
     
     public:
         ClapTrap();
@@ -20,6 +21,6 @@ class ClapTrap {
         void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
-}
+};
 
 #endif
