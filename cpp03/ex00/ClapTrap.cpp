@@ -1,21 +1,22 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() : _name("Yassine"), _HP(10), _EP(10), _AD(0) {
-    std::cout << "ClapTrap created with default attributes!\n";
+    std::cout << "ClapTrap default constructor called!\n";
 }
 
 ClapTrap::ClapTrap(const std::string &name) : _name(name), _HP(10), _EP(10), _AD(0) {
-    std::cout << "ClapTrap named " << name << " created!\n";
+    std::cout << "ClapTrap parameterized constructor called!"
+              << " (name: " << _name << " )\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other) {
-    std::cout << "ClapTrap copied from another instance!\n";
+    std::cout << "ClapTrap copie contructor called!\n";
     *this = other;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
-    std::cout << "ClapTrap assigned from another instance!\n";
+    std::cout << "ClapTrap copie assignement operator called!\n";
     if (this != &other)
     {
         _name = other._name;
@@ -27,7 +28,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 }
 
 ClapTrap::~ClapTrap() {
-    std::cout << "ClapTrap "<< _name << " destroyed!\n";
+    std::cout << "ClapTrap destructor called!\n";
 }
 
 void ClapTrap::attack(const std::string& target) {
@@ -41,7 +42,7 @@ void ClapTrap::attack(const std::string& target) {
     }
     _EP--;
     std::cout << "ClapTrap " << _name << " attacks " << target
-              << ", causing damage! (EP now: " << _EP << ")\n";;
+              << ", causing "  << _AD << " of damage! (EP now: " << _EP << ")\n";
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
@@ -73,4 +74,3 @@ void ClapTrap::beRepaired(unsigned int amount) {
     std::cout << "ClapTrap " << _name << " repairs itself for " << amount
               << " HP! (HP now: " << _HP << ", EP now: " << _EP << ")\n";
 }
-

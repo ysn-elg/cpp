@@ -2,7 +2,7 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-    std::cout << "ScavTrap created with default attributes!\n";
+    std::cout << "ScavTrap default constructor called!\n";
     _HP = 100;
     _EP = 50;
     _AD = 20;
@@ -10,7 +10,8 @@ ScavTrap::ScavTrap() : ClapTrap()
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 {
-    std::cout << "ScavTrap named " << name << " created!\n";
+    std::cout << "ScavTrap parameterized constructor called!"
+              << " (name: " << _name << " )\n";
     _HP = 100;
     _EP = 50;
     _AD = 20;
@@ -18,12 +19,12 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
-    std::cout << "ScavTrap copied from another instance!\n";
+    std::cout << "ScavTrap copie contructor called!\n";
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
-    std::cout << "ScavTrap assigned from another instance!\n";
+    std::cout << "ScavTrap copie assignement operator called!\n";
     if (this != &other) {
         _name = other._name;
         _HP = other._HP;
@@ -35,7 +36,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "ScavTrap "<< _name << " destroyed!\n";
+    std::cout << "ScavTrap destructor called!\n";
 }
 
 void ScavTrap::guardGate() {

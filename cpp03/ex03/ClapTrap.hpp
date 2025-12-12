@@ -5,7 +5,7 @@
 # include <iostream>
 
 class ClapTrap {
-    protected: //////////////
+    protected: 
         std::string _name;
         int         _HP;
         int         _EP;

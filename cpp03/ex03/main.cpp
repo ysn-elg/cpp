@@ -1,21 +1,18 @@
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main() {
-    FragTrap yassine("Yassine");
-    FragTrap othman("Othman");
+    DiamondTrap A("Yassine");
 
-    yassine.attack("Othman");
-    othman.takeDamage(3);
+    A.attack("enemy");
+    A.takeDamage(10);
+    A.beRepaired(5);
 
-    othman.attack("Yassine");
-    yassine.takeDamage(5);
+    A.guardGate();
 
-    yassine.beRepaired(4);
-    othman.beRepaired(2);
+    A.highFivesGuys();
 
-    yassine.attack("Othman");
-    othman.takeDamage(6);
-
+    A.whoAmI();
+    
     return 0;
 }
 
