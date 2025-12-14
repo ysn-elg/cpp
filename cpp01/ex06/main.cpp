@@ -1,6 +1,8 @@
 #include "Harl.hpp"
 #include <iostream>
 
+/* Subject said you must use SWITCH case (I thought it was a recomdantion hh) */
+
 int main(int ac, char **av)
 {
     Harl harl;
