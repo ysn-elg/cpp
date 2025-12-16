@@ -1,10 +1,10 @@
 
-NAME		= Animal 
+NAME		= Animal
 
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= Animal.cpp  Cat.cpp  Dog.cpp  main.cpp
+SRCS		= Animal.cpp  Cat.cpp  Dog.cpp  WrongAnimal.cpp  WrongCat.cpp  main.cpp
 
 OBJ_DIR		= objs
 OBJS		= $(addprefix $(OBJ_DIR)/,$(SRCS:.cpp=.o))
@@ -17,19 +17,23 @@ RESET       = \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	@echo "Executable $(GREEN)$(NAME)$(RESET) built successfully!"
 
 $(OBJ_DIR)/%.o:%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	@echo "$(YELLOW)Compiling:$(RESET) $<"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR) #-p avoid errors
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
+	@echo "$(RED)[CLEAN]$(RESET) Object files removed"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(RED)[FCLEAN]$(RESET) Executable removed."
 
 re: fclean all
 
