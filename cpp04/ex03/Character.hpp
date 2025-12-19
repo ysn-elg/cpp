@@ -14,7 +14,7 @@ public:
     Character();
     Character(const std::string &name);
     Character(const Character &other);
-    ~Character();
+    ~Character(); // virtual !!
 
     Character &operator=(const Character &other);
 

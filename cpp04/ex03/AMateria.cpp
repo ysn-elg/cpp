@@ -18,9 +18,6 @@ AMateria &AMateria::operator=(const AMateria& other) {
 
 AMateria::~AMateria() { }
 
-std::string const & getType() const { return type; }
+std::string const & AMateria::getType() const { return type; }
 
-virtual void use(ICharacter& target)
-{
-    std::cout << "...";    
-}
+void AMateria::use(ICharacter& target) { }
