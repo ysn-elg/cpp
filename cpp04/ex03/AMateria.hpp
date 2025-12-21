@@ -1,7 +1,7 @@
 #ifndef   AMATERIA_HPP
 # define  AMATERIA_HPP
 
-// Include ICharacter
+# include "ICharacter.hpp"
 
 class AMateria
 {
@@ -11,7 +11,7 @@ public:
     AMateria();
     AMateria(std::string const & type);
     AMateria(const AMateria& other);
-    ~AMateria();
+    virtual ~AMateria();
 
     AMateria &operator=(const AMateria& other);
 

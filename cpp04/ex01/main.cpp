@@ -4,20 +4,15 @@
 #include "Cat.hpp"
 
 int main() {
-    Animal* dog = new Dog();
-    // Animal* cat = new Cat();
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
+    delete j;
+    delete i;
 
-    dog->makeSound();
-    // cat->makeSound();
+    Dog d1;
+    Dog d2(d1);
+    
+    d2.makeSound();
 
-    delete dog;
-    // delete cat;
-
-    // std::cout << "\nDeep copy test:\n";
-    // Dog a;
-    // Dog b(a);
-    // Dog c;
-    // c = a;
-    //
     return 0;
 }

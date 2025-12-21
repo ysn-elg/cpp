@@ -10,11 +10,16 @@ Character::Character(const std::string &name) : _name(name) {
         inventory[i] = NULL;
 }
 
-Character::Character(const Character& other) {
-    *this = other;
+Character::Character(const Character& other) : _name(other._name){
+    for (int i = 0; i < 4; i++) {
+        if (other.inventory[i])
+            inventory[i] = other.inventory[i]->clone();
+        else
+            inventory[i] = NULL;
+    }
 }
 
-Character &Character::operator=(const Character &other) { // check it again looks wrong
+Character &Character::operator=(const Character &other) {
     if (this != &other) {
         _name = other._name;
         for(int i = 0; i < 4; i++) {
@@ -31,7 +36,12 @@ Character &Character::operator=(const Character &other) { // check it again look
 
 Character::~Character() {
     for (int i = 0; i < 4; i++)
-        delete inventory[i];
+    {
+        if (inventory[i]) {
+            delete inventory[i];
+            inventory[i] = NULL;
+        }
+    }
 }
 
 std::string const & Character::getName() const {
@@ -56,9 +66,7 @@ void Character::unequip(int idx) {
 }
 
 void Character::use(int idx, ICharacter& target) {
-    if (idx < 0 || idx >= 4)
-        return ;
-    if (inventory[idx] == NULL)
+    if (idx < 0 || idx >= 4 || inventory[idx] == NULL)
         return ;
     inventory[idx]->use(target);
 }

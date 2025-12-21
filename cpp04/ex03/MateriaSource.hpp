@@ -1,4 +1,4 @@
-#ifndef    MATERIASOURCE_HPP
+#ifndef   MATERIASOURCE_HPP
 # define  MATERIASOURCE_HPP
 
 # include "IMateriaSource.hpp"
@@ -11,7 +11,7 @@ private:
 public:
     MateriaSource();
     MateriaSource(const MateriaSource &other);
-    ~MateriaSource(); // V?
+    ~MateriaSource(); 
     MateriaSource &operator=(const MateriaSource &other);
 
     void learnMateria(AMateria*);

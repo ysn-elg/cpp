@@ -1,5 +1,5 @@
-#ifndef   CHARACHTER_HPP
-# define  CHARACHTER_HPP
+#ifndef   CHARACTER_HPP
+# define  CHARACTER_HPP
 
 # include "ICharacter.hpp"
 # include "AMateria.hpp"
@@ -14,7 +14,7 @@ public:
     Character();
     Character(const std::string &name);
     Character(const Character &other);
-    ~Character(); // virtual !!
+    ~Character();
 
     Character &operator=(const Character &other);
 
