@@ -18,6 +18,16 @@ public:
     int getGrade() const;
     void incrementGrade();
     void decrementGrade();
+    
+    class GradeTooHighException : public std::exception {
+    public:
+        const char* what() const throw(); // still need more research
+    };
+
+    class GradeTooLowException : public std::exception {
+    public:
+        const char* what() const throw(); // 
+    };
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &obj); 
