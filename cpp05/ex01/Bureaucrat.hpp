@@ -2,7 +2,7 @@
 # define  BUREAUCRAT_HPP
 
 # include <string>
-
+# include "Form.hpp"
 class Bureaucrat {
 private:
     const std::string _name;
@@ -29,7 +29,7 @@ public:
         const char* what() const throw(); // 
     };
     
-    void signForm(Form::beSigned()); // TODO:
+    void signForm(Form &obj); // TODO:
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &obj); 
