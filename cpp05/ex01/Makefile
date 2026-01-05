@@ -3,7 +3,7 @@ NAME		= Bureaucrat
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= Bureaucrat.cpp  main.cpp
+SRCS		= Bureaucrat.cpp  Form.cpp  main.cpp
 
 OBJ_DIR		= objs
 OBJS		= $(addprefix $(OBJ_DIR)/,$(SRCS:.cpp=.o))

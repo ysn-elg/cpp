@@ -2,6 +2,7 @@
 # define  BUREAUCRAT_HPP
 
 # include <string>
+# include <exception>
 
 class Bureaucrat {
 private:

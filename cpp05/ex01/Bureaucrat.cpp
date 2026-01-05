@@ -1,15 +1,13 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat() : _name("anonymous"), _grade(150)
-{
-    std::cout << "Default constructor called!\n";
-}
+{ }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
                 : _name(name), _grade(grade)
 {
-    std::cout << "Parametrized constructor called!\n";
     if (_grade > 150)
         throw GradeTooLowException();
     else if (_grade < 1)
@@ -18,21 +16,16 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
 
 Bureaucrat::Bureaucrat(const Bureaucrat&other)
             : _name(other._name), _grade(other._grade)
-{
-    std::cout << "Copy constructor called!\n";
-}
+{ }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat& other)
 {
-    std::cout << "Copy assignement operator called!\n";
     if (this != &other)
         _grade = other._grade;
     return *this;
 }
 
-Bureaucrat::~Bureaucrat() {
-    std::cout << "Destructor called!\n";
-}
+Bureaucrat::~Bureaucrat() { }
 
 const std::string& Bureaucrat::getName() const { return _name; }
 int Bureaucrat::getGrade() const { return _grade; }
@@ -67,7 +60,7 @@ void Bureaucrat::signForm(Form &obj)
 {
     try
     {
-        obj.beSigned(*this); ///////
+        obj.beSigned(*this);
         std::cout << this->getName()<< " signed " << obj.getName() << std::endl;
     }
     catch (const std::exception& e)

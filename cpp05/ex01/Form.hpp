@@ -4,7 +4,8 @@
 # include <string>
 # include <ostream>
 # include <exception>
-# include "Bureaucrat.hpp"
+// # include "Bureaucrat.hpp" // I can use class Bureaucrat; instaed
+class Bureaucrat;
 
 class Form {
 private:
@@ -40,23 +41,3 @@ public:
 std::ostream &operator<<(std::ostream &os, const Form& obj);
 
 #endif
-
-
-
-
-/////////////////////////////////////////////////////////////////////
-void Bureaucrat::signForm(Form& obj) const
-{
-    try
-    {
-        obj.beSigned(*this); // Attempt to sign the form
-        std::cout << getName() << " signed " << obj.getName() << std::endl;
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << getName() << " couldn’t sign " 
-                  << obj.getName() << " because " 
-                  << e.what() << std::endl;
-    }
-}
-//////////////////////////////////////////////////////////////////////

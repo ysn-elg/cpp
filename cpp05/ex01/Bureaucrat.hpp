@@ -2,7 +2,10 @@
 # define  BUREAUCRAT_HPP
 
 # include <string>
-# include "Form.hpp"
+// # include "Form.hpp" // I can use class Form;
+
+class Form;
+
 class Bureaucrat {
 private:
     const std::string _name;

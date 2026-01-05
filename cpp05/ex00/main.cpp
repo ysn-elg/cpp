@@ -1,4 +1,3 @@
-
 #include "Bureaucrat.hpp"
 #include <iostream>
 
@@ -6,53 +5,30 @@ int main()
 {
     try
     {
-        Bureaucrat b1; // default constructor
-        std::cout << b1;
+        Bureaucrat a("Alice", 2);
+        std::cout << a << std::endl;
 
-        Bureaucrat b2("Alice", 2); // parametrized constructor
-        std::cout << b2;
+        a.incrementGrade();   /* should become grade 1 */
+        std::cout << a << std::endl;
 
-        // incrementGrade test
-        b2.incrementGrade(); // grade should go from 2 → 1
-        std::cout << "After increment: " << b2;
-
-        // this should throw GradeTooHighException
-        b2.incrementGrade(); 
+        a.incrementGrade();   /* should throw */
     }
-    catch (const Bureaucrat::GradeTooHighException& e)
+    catch (std::exception& e)
     {
-        std::cerr << "Caught exception: " << e.what() << std::endl;
+        std::cout << "Exception caught: " << e.what() << std::endl;
     }
-    catch (const Bureaucrat::GradeTooLowException& e)
-    {
-        std::cerr << "Caught exception: " << e.what() << std::endl;
-    }
+    
+    std::cout << "------------------------------------------" << std::endl;
 
     try
     {
-        Bureaucrat b3("Bob", 150);
-        std::cout << b3;
-
-        // decrementGrade test
-        b3.decrementGrade(); // grade should go from 150 → 151 → should throw
+        Bureaucrat b("Bob", 200); /* invalid → throws */
     }
-    catch (const Bureaucrat::GradeTooHighException& e)
+    catch (std::exception& e)
     {
-        std::cerr << "Caught exception: " << e.what() << std::endl;
+        std::cout << "Exception caught: " << e.what() << std::endl;
     }
-    catch (const Bureaucrat::GradeTooLowException& e)
-    {
-        std::cerr << "Caught exception: " << e.what() << std::endl;
-    }
-
-    // copy constructor and assignment operator test
-    Bureaucrat original("Charlie", 75);
-    Bureaucrat copy(original); // copy constructor
-    std::cout << "Copy: " << copy;
-
-    Bureaucrat assigned;
-    assigned = original; // copy assignment
-    std::cout << "Assigned: " << assigned;
 
     return 0;
 }
+

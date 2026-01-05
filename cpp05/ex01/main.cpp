@@ -1,32 +1,27 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 int main()
 {
     try
     {
-        Bureaucrat a("Alice", 2);
-        std::cout << a << std::endl;
+        Bureaucrat boss("Boss", 1);
+        Bureaucrat intern("Intern", 150);
 
-        a.incrementGrade();   // should become grade 1
-        std::cout << a << std::endl;
+        Form taxForm("Tax Form", 50, 20);
 
-        a.incrementGrade();   // should throw
-    }
-    catch (std::exception& e)
-    {
-        std::cout << "Exception caught: " << e.what() << std::endl;
-    }
+        std::cout << taxForm << std::endl;
 
-    try
-    {
-        Bureaucrat b("Bob", 200); // invalid → throws
+        intern.signForm(taxForm);   // should fail
+        boss.signForm(taxForm);     // should succeed
+
+        std::cout << taxForm << std::endl;
     }
-    catch (std::exception& e)
+    catch (std::exception &e)
     {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
 
     return 0;
 }
-
