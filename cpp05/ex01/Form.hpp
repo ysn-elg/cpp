@@ -4,13 +4,13 @@
 # include <string>
 # include <ostream>
 # include <exception>
-// # include "Bureaucrat.hpp" // I can use class Bureaucrat; instaed
+
 class Bureaucrat;
 
 class Form {
 private:
     const std::string _name;
-    bool  _sign;
+    bool  _signed;
     const int _gradeToSign;
     const int _gradeToExecute;
 public:

@@ -4,24 +4,19 @@
 
 int main()
 {
-    try
-    {
-        Bureaucrat boss("Boss", 1);
-        Bureaucrat intern("Intern", 150);
+    Bureaucrat  A("[A]", 99);
+    Bureaucrat  B("[B]", 10);
+    Form        F("[F]", 13, 37);
 
-        Form taxForm("Tax Form", 50, 20);
+    std::cout << A << std::endl;
+    std::cout << B << std::endl;
+    std::cout << F << std::endl;
 
-        std::cout << taxForm << std::endl;
+    std::cout << std::endl;
+    A.signForm(F);              /*   should  fail   */
+    std::cout << F << std::endl;
 
-        intern.signForm(taxForm);   // should fail
-        boss.signForm(taxForm);     // should succeed
-
-        std::cout << taxForm << std::endl;
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "Exception caught: " << e.what() << std::endl;
-    }
-
-    return 0;
+    std::cout << std::endl;
+    B.signForm(F);              /*  should succeed  */
+    std::cout << F << std::endl;
 }

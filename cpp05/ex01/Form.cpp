@@ -1,32 +1,33 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
-Form::Form() : _name("anonymous"), _sign(false), _gradeToSign(150), _gradeToExecute(150)
+
+Form::Form() : _name("anonymous"), _signed(false), _gradeToSign(150), _gradeToExecute(150)
 { }
 
 Form::Form(const std::string& name, const int gradeToSign, const int gradeToExecute)
-    : _name(name), _sign(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
+    : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
-    if (_gradeToExecute > 150 || _gradeToSign > 150)
+    if (_gradeToSign > 150 || _gradeToExecute > 150)
         throw GradeTooLowException();
-    else if (_gradeToExecute < 1 || _gradeToSign < 1)
+    else if (_gradeToSign < 1 || _gradeToExecute < 1)
         throw GradeTooHighException();
 }
 
 Form::Form(const Form& other) 
-    : _name(other._name), _sign(other._sign), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
+    : _name(other._name), _signed(other._signed), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
 { }
 
 Form &Form::operator=(const Form& other)
 {
     if (this != &other)
-        _sign = other._sign;
+        _signed = other._signed;
     return *this;
 }
 
 Form::~Form() { }
 
 const std::string& Form::getName() const { return _name; }
-bool  Form::getSign() const { return _sign; }
+bool  Form::getSign() const { return _signed; }
 int   Form::getGradeToSign() const { return _gradeToSign; }
 int   Form::getGradeToExecute() const { return _gradeToExecute; }
 
@@ -40,10 +41,11 @@ const char* Form::GradeTooLowException::what() const throw()
     return "Grade too low!";
 }
 
-void  Form::beSigned(const Bureaucrat& obj) {
+void  Form::beSigned(const Bureaucrat& obj)
+{
     if (obj.getGrade() > _gradeToSign)
-        throw Form::GradeTooLowException();
-    _sign = true;
+        throw Form::GradeTooLowException(); // TODO: does scope importent here!?
+    _signed = true;
 }
 
 std::ostream &operator<<(std::ostream &os, const Form& obj)
