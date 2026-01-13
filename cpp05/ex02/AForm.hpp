@@ -36,6 +36,8 @@ public:
     int   getGradeToExecute() const;
 
     void  beSigned(const Bureaucrat& obj);
+
+    execute(Bureaucrat const & executor) const; // TODO:
 };
 
 std::ostream &operator<<(std::ostream &os, const AForm& obj);
