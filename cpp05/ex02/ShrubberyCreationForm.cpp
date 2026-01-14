@@ -22,12 +22,13 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 ShrubberyCreationForm::~ShrubberyCreationForm()
 { }
 
-void ShrubberyCreationForm::createShrubbery() const
+void ShrubberyCreationForm::beExecuted() const
 {
     std::ofstream outFile((_target + "_shrubbery").c_str());
     if (!outFile.is_open())
     {
         std::cerr << "Error opening file: " << _target << "_shrubbery\n" // TODO: throw error!
+        // TODO: throw std::runtime_error("Failed to create shrubbery file");
         return;
     }
 
