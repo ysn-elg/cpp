@@ -60,7 +60,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
     return "Grade too low!";
 }
 
-void Bureaucrat::signAForm(AForm &obj)
+void Bureaucrat::signForm(AForm &obj)
 {
     try
     {
@@ -72,6 +72,23 @@ void Bureaucrat::signAForm(AForm &obj)
         std::cout << _name << " couldn’t sign "
                   << obj.getName() << " because "
                   << e.what() << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(AForm const & form) const
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << _name << " couldn’t execute "
+                  << form.getName()
+                  << " because "
+                  << e.what()
+                  << std::endl;
     }
 }
 

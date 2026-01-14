@@ -3,7 +3,8 @@ NAME		= Bureaucrat
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= Bureaucrat.cpp  Form.cpp  main.cpp
+SRCS		= AForm.cpp   main.cpp  RobotomyRequestForm.cpp \
+			  Bureaucrat.cpp  PresidentialPardonForm.cpp  ShrubberyCreationForm.cpp
 
 OBJ_DIR		= objs
 OBJS		= $(addprefix $(OBJ_DIR)/,$(SRCS:.cpp=.o))
@@ -24,7 +25,7 @@ $(OBJ_DIR)/%.o:%.cpp | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling:$(RESET) $<"
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR) #-p avoid errors
+	@mkdir -p $(OBJ_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR)

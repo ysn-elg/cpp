@@ -34,7 +34,9 @@ public:
     void incrementGrade();
     void decrementGrade();
 
-    void signAForm(AForm &obj);
+    void signForm(AForm &obj);
+
+    void executeForm(AForm const & form) const;
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat& obj);

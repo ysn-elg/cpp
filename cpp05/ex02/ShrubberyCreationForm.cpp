@@ -1,4 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
+#include <iostream>
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm()
                 : AForm("ShrubberyCreationForm", 145, 137), _target("x")
@@ -27,7 +29,7 @@ void ShrubberyCreationForm::beExecuted() const
     std::ofstream outFile((_target + "_shrubbery").c_str());
     if (!outFile.is_open())
     {
-        std::cerr << "Error opening file: " << _target << "_shrubbery\n" // TODO: throw error!
+        std::cerr << "Error opening file: " << _target << "_shrubbery\n"; // TODO: throw error!
         // TODO: throw std::runtime_error("Failed to create shrubbery file");
         return;
     }

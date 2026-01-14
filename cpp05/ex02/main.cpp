@@ -1,22 +1,28 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
-#include <iostream>
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
-    Bureaucrat  A("[A]", 99);
-    Bureaucrat  B("[B]", 10);
-    Form        F("[F]", 13, 37);
+    Bureaucrat boss("Boss", 1);
 
-    std::cout << A << std::endl;
-    std::cout << B << std::endl;
-    std::cout << F << std::endl;
+    AForm* f1 = new ShrubberyCreationForm("home");
+    AForm* f2 = new RobotomyRequestForm("Bender");
+    AForm* f3 = new PresidentialPardonForm("Arthur");
 
-    std::cout << std::endl;
-    A.signForm(F);              /*   should  fail   */
-    std::cout << F << std::endl;
+    boss.signForm(*f1);
+    boss.executeForm(*f1);
 
-    std::cout << std::endl;
-    B.signForm(F);              /*  should succeed  */
-    std::cout << F << std::endl;
+    boss.signForm(*f2);
+    boss.executeForm(*f2);
+
+    boss.signForm(*f3);
+    boss.executeForm(*f3);
+
+    delete f1;
+    delete f2;
+    delete f3;
+
+    return 0;
 }
