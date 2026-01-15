@@ -1,7 +1,7 @@
 NAME		= Bureaucrat
 
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
 SRCS		= AForm.cpp   main.cpp  RobotomyRequestForm.cpp \
 			  Bureaucrat.cpp  PresidentialPardonForm.cpp  ShrubberyCreationForm.cpp

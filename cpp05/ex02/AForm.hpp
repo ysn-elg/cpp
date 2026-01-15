@@ -44,7 +44,7 @@ public:
 
     void execute(Bureaucrat const & executor) const;
     virtual void	beExecuted() const = 0;
-};
+}
 
 std::ostream &operator<<(std::ostream &os, const AForm& obj);
 

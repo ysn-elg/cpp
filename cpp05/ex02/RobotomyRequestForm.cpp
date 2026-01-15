@@ -1,6 +1,7 @@
 #include "RobotomyRequestForm.hpp"
 #include <iostream>
-#include <cstdlib> /* rand() */
+#include <cstdlib>
+#include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm()
                 : AForm("RobotomyRequestForm", 72, 45), _target("x")
@@ -26,7 +27,8 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void RobotomyRequestForm::beExecuted() const
 {
-    std::cout << "...Drilling noises..." << std::endl;
+    std::srand(std::time(0));
+    std::cout << "Drilling noises Brrrrr..Vvrrrr..#!$%?*&..." << std::endl;
     if (std::rand() % 2)
         std::cout << _target << " has been robotomized successfully" << std::endl;
     else
