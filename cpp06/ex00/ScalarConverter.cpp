@@ -1,12 +1,29 @@
 #include "ScalarConverter.hpp"
 
+/* -------------------------------------------------------- */
 
-static void detection(std::string& input) {
-    // TODO: if else...
+ScalarConverter::ScalarConverter()
+{
 }
 
+ScalarConverter::ScalarConverter(const ScalarConverter &)
+{
+}
+
+ScalarConverter::~ScalarConverter()
+{
+}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &)
+{
+    return *this;
+}
+
+/* -------------------------------------------------------- */
+parse
+
 void ScalarConverter::convert(std::string& input) {
-    type = detection(input); // first step: Detection
+    Type type = detection(input); // first step: Detection
     if (type == TYPE_INVALID)
         ; // TODO: print impossible;
     value = parse(input, type);

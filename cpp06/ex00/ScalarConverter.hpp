@@ -1,7 +1,7 @@
 #ifndef   SCALARCONVERTER_HPP
 # define  SCALARCONVERTER_HPP
 
-enum type {
+enum Type {
     TYPE_CHAR,
     TYPE_INT,
     TYPE_FLOAT,
