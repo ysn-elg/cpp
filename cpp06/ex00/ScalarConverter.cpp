@@ -1,8 +1,7 @@
 #include "ScalarConverter.hpp"
+#include "Types.hpp"
 
-/* -------------------------------------------------------- */
-
-ScalarConverter::ScalarConverter()
+ScalarConverter::ScalarConverter() // private constructor? read more.
 {
 }
 
@@ -19,13 +18,13 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &)
     return *this;
 }
 
-/* -------------------------------------------------------- */
-parse
 
-void ScalarConverter::convert(std::string& input) {
-    Type type = detection(input); // first step: Detection
-    if (type == TYPE_INVALID)
-        ; // TODO: print impossible;
-    value = parse(input, type);
+void ScalarConverter::convert(const std::string& input)
+{
+    Type type = detection(input);
+    // if (type == TYPE_INVALID)
+    //     ; // TODO: print impossible;
 
+    resultValues V = getValues(input, type);
+    printResultes(V);
 }

@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include "Types.hpp"
 
 static bool isSpecial(const std::string& input) {
     return (input == "nan"  || input == "nanf" ||
@@ -6,7 +7,7 @@ static bool isSpecial(const std::string& input) {
             input == "+inff"|| input == "-inff");
 }
 
-static Type detection(const std::string& input) {
+Type detection(const std::string& input) {
     if (input.empty())
         return TYPE_INVALID;
     if (isSpecial(input))
@@ -14,7 +15,7 @@ static Type detection(const std::string& input) {
     if (input.length() == 1 && !std::isdigit(input[0])) // TODO: static cast here!
         return TYPE_CHAR;
     bool hasDot = false, hasF = false;
-    int i = 0;
+    size_t i = 0;
     if (input[0] == '+' || input[0] == '-')
         i++;
     if (i >= input.length())
@@ -37,5 +38,3 @@ static Type detection(const std::string& input) {
         return TYPE_INVALID;
     return TYPE_INT;
 }
-
-

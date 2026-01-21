@@ -1,14 +1,7 @@
 #ifndef   SCALARCONVERTER_HPP
 # define  SCALARCONVERTER_HPP
 
-enum Type {
-    TYPE_CHAR,
-    TYPE_INT,
-    TYPE_FLOAT,
-    TYPE_DOUBLE,
-    TYPE_SPECIAL,
-    TYPE_INVALID
-};
+# include <string>
 
 class ScalarConverter
 {
@@ -18,7 +11,7 @@ private:
     ScalarConverter &operator=(const ScalarConverter& other);
     ~ScalarConverter();
 public:
-    static void convert(std::string &input);
-}
+    static void convert(const std::string &input);
+};
 
 #endif
