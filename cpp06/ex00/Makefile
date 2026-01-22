@@ -1,9 +1,9 @@
 NAME		= convert
 
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS		= detectType.cpp  main.cpp  parse.cpp  ScalarConverter.cpp
+SRCS		= detectType.cpp  main.cpp  print.cpp  convertAll.cpp  ScalarConverter.cpp
 
 OBJ_DIR		= objs
 OBJS		= $(addprefix $(OBJ_DIR)/,$(SRCS:.cpp=.o))

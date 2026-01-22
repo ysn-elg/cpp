@@ -20,5 +20,6 @@ struct resultValues {
 Type detection(const std::string& input);
 resultValues getValues(const std::string& input, Type type);
 void printResultes(resultValues &V);
+void printImpossible();
 
 #endif

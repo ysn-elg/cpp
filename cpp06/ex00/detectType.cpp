@@ -1,5 +1,7 @@
 #include "ScalarConverter.hpp"
 #include "Types.hpp"
+#include <limits>
+#include <cstdlib>
 
 static bool isSpecial(const std::string& input) {
     return (input == "nan"  || input == "nanf" ||
@@ -18,7 +20,7 @@ Type detection(const std::string& input) {
     size_t i = 0;
     if (input[0] == '+' || input[0] == '-')
         i++;
-    if (i >= input.length())
+    if (i >= input.length()) // TODO: !
         return TYPE_INVALID;
     for(; i < input.length(); i++) {
         if (std::isdigit(input[i]))
@@ -36,5 +38,8 @@ Type detection(const std::string& input) {
         return TYPE_DOUBLE;
     if (hasF)
         return TYPE_INVALID;
+    if (std::strtod(input.c_str(), NULL) > std::numeric_limits<char>::max()
+        || std::strtod(input.c_str(), NULL) < std::numeric_limits<char>::min())
+        return TYPE_DOUBLE;
     return TYPE_INT;
 }

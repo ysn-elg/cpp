@@ -22,9 +22,10 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &)
 void ScalarConverter::convert(const std::string& input)
 {
     Type type = detection(input);
-    // if (type == TYPE_INVALID)
-    //     ; // TODO: print impossible;
-
+    if (type == TYPE_INVALID) {
+        printImpossible();
+        return ;
+    }
     resultValues V = getValues(input, type);
     printResultes(V);
 }

@@ -6,16 +6,6 @@
 #include <cstdlib>
 #include <limits>
 
-void printResultes(resultValues &V)
-{
-    if (V.c < 32 || V.c == 127)
-        std::cout << "char: Non displayable"<< std::endl;
-    else
-        std::cout << "char: "   << V.c << std::endl;
-    std::cout << "int: "    << V.i << std::endl;
-    std::cout << "float: "  << V.f << "f" << std::endl;
-    std::cout << "double: " << V.d << std::endl;
-}
 
 static resultValues convertToActualType(const std::string& input, Type type)
 {
