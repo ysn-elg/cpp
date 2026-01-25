@@ -2,6 +2,7 @@
 #include "Types.hpp"
 #include <limits>
 #include <cstdlib>
+#include <iostream>
 
 static bool isSpecial(const std::string& input) {
     return (input == "nan"  || input == "nanf" ||
@@ -14,13 +15,13 @@ Type detection(const std::string& input) {
         return TYPE_INVALID;
     if (isSpecial(input))
         return TYPE_SPECIAL;
-    if (input.length() == 1 && !std::isdigit(input[0])) // TODO: static cast here!
+    if (input.length() == 1 && !std::isdigit(input[0]))
         return TYPE_CHAR;
     bool hasDot = false, hasF = false;
     size_t i = 0;
     if (input[0] == '+' || input[0] == '-')
         i++;
-    if (i >= input.length()) // TODO: !
+    if (i == input.length())
         return TYPE_INVALID;
     for(; i < input.length(); i++) {
         if (std::isdigit(input[i]))
@@ -38,8 +39,9 @@ Type detection(const std::string& input) {
         return TYPE_DOUBLE;
     if (hasF)
         return TYPE_INVALID;
-    if (std::strtod(input.c_str(), NULL) > std::numeric_limits<char>::max()
-        || std::strtod(input.c_str(), NULL) < std::numeric_limits<char>::min())
+
+    if (std::strtod(input.c_str(), NULL) > std::numeric_limits<int>::max()
+        || std::strtod(input.c_str(), NULL) < std::numeric_limits<int>::min())
         return TYPE_DOUBLE;
     return TYPE_INT;
 }

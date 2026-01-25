@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <limits>
+#include <iomanip>
 
 void printImpossible()
 {
@@ -43,14 +44,14 @@ static void printFloat(resultValues &V)
     std::cout << "float: ";
     if (std::isnan(V.d))
         std::cout << "nanf\n";
-    else if (std::isinf(V.d))
-        std::cout << (V.d < 0 ? "-inff\n" : "+inff\n");
-    else {
-        std::cout << V.f;
-        if (V.f == static_cast<long>(V.f))
-            std::cout << ".0";
-        std::cout << "f\n";
-    }
+    else if (std::isinf(V.d) && V.d > 0)
+        std::cout << ("+inff\n");
+    else if (std::isinf(V.d) && V.d < 0)
+        std::cout << ("-inff\n");
+    else if (V.d > std::numeric_limits<float>::max()) 
+        std::cout << "+inff\n";
+    else
+        std::cout << V.f << "f\n";
 }
 
 static void printDouble(resultValues &V)
@@ -58,18 +59,17 @@ static void printDouble(resultValues &V)
     std::cout << "double: ";
     if (std::isnan(V.d))
         std::cout << "nan\n";
-    else if (std::isinf(V.d))
-        std::cout << (V.d < 0 ? "-inf\n" : "+inf\n");
-    else {
-        std::cout << V.d;
-        if (V.d == static_cast<long>(V.d))
-            std::cout << ".0";
-        std::cout << "\n";
-    }
+    else if (std::isinf(V.d) && V.d > 0)
+        std::cout << ("+inf\n");
+    else if (std::isinf(V.d) && V.d < 0)
+        std::cout << ("-inf\n");
+    else
+        std::cout << V.d << std::endl;
 }
 
 void printResultes(resultValues &V)
 {
+    std::cout << std::fixed << std::setprecision(1);
     printChar(V);
     printInt(V);
     printFloat(V);
