@@ -2,6 +2,8 @@
 #include "Serializer.hpp"
 #include "Data.hpp"
 
+#include <stdint.h>
+
 int main()
 {
     Data d;
@@ -11,7 +13,7 @@ int main()
     std::cout << "serialized pointer: " << raw << std::endl;
 
     Data* ptr2 = Serializer::deserialize(raw);
-    std::cout << "Original ptr: \t" << &d << std::endl;
+    std::cout << "Original ptr:     " << &d << std::endl;
     std::cout << "Deserialized ptr: " << ptr2 << std::endl;
 
     if (&d == ptr2)

@@ -24,7 +24,7 @@ $(OBJ_DIR)/%.o:%.cpp | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling:$(RESET) $<"
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR) #-p avoid errors
+	@mkdir -p $(OBJ_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR)
