@@ -12,7 +12,7 @@ void printElement(T const &element)
 
 void chaos(int &element)
 {
-    element += (std::rand() % 570) + 570;
+    element += -(std::rand() % 570) + 2026;
 }
 
 int main()

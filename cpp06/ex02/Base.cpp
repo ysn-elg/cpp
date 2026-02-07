@@ -11,7 +11,6 @@ Base::~Base()
 }
 
 Base * generate(void) {
-    // std::srand(std::time(0));
     int r = std::rand() % 3;
     if (r == 0)
         return new A();
