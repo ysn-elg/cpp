@@ -27,7 +27,7 @@ Form &Form::operator=(const Form& other)
 Form::~Form() { }
 
 const std::string& Form::getName() const { return _name; }
-bool  Form::getSign() const { return _signed; }
+bool  Form::isSigned() const { return _signed; }
 int   Form::getGradeToSign() const { return _gradeToSign; }
 int   Form::getGradeToExecute() const { return _gradeToExecute; }
 
@@ -44,14 +44,14 @@ const char* Form::GradeTooLowException::what() const throw()
 void  Form::beSigned(const Bureaucrat& obj)
 {
     if (obj.getGrade() > _gradeToSign)
-        throw Form::GradeTooLowException(); // TODO: does scope importent here!?
+        throw GradeTooLowException();
     _signed = true;
 }
 
 std::ostream &operator<<(std::ostream &os, const Form& obj)
 {
     os << "Form name: " << obj.getName() << ", "
-       << "signed: " << obj.getSign() << ", "
+       << "signed: " << obj.isSigned() << ", "
        << "grade to sign: " << obj.getGradeToSign() << ", "
        << "grade to execute: " << obj.getGradeToExecute();
     return os;

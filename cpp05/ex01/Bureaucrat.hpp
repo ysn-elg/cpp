@@ -3,6 +3,7 @@
 
 # include <string>
 # include <exception>
+# include <ostream>
 
 class Form;
 
@@ -28,7 +29,7 @@ public:
         const char* what() const throw();
     };
 
-    const std::string getName() const;
+    const std::string& getName() const;
     int getGrade() const;
 
     void incrementGrade();

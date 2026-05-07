@@ -31,7 +31,7 @@ public:
     };
 
     const std::string& getName() const;
-    bool  getSign() const;
+    bool  isSigned() const;
     int   getGradeToSign() const;
     int   getGradeToExecute() const;
 
