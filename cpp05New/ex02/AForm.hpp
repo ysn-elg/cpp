@@ -17,7 +17,7 @@ public:
     AForm();
     AForm(const std::string& name, const int gradeToSign, const int gradeToExecute);
     AForm(const AForm& other);
-    ~AForm();
+    virtual ~AForm(); // TODO:
 
     AForm& operator=(const AForm& other);
 
@@ -27,7 +27,9 @@ public:
     int                 getGradeToExecute() const;
 
     void  beSigned(Bureaucrat& obj);
-    void  execute(Bureaucrat const & executor) const;
+    void  execute(Bureaucrat const & executor) const; // TODO: New
+
+    virtual void	beExecuted() const = 0; // TODO: New
 
     class GradeTooHighException : public std::exception {
         const char* what() const throw();

@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <exception>
 #include <iostream>
 #include <ostream>
@@ -51,7 +51,7 @@ void Bureaucrat::decrementGrade()
     _grade++;
 }
 
-void Bureaucrat::signForm(Form& obj) {
+void Bureaucrat::signForm(AForm& obj) {
     try {
         obj.beSigned(*this);
         std::cout << _name <<" signed " << obj.getName() << std::endl;
@@ -61,6 +61,20 @@ void Bureaucrat::signForm(Form& obj) {
                   << obj.getName()  << " because "
                   << e.what() << " (" << _grade << " lower than "
                   << obj.getGradeToSign() << " grade)." << std::endl;
+    }
+}
+
+void  Bureaucrat::executeForm(AForm const & form) const {
+    try {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    }
+    catch(std::exception& e) {
+        std::cerr << _name << " couldn’t execute "
+                  << form.getName()
+                  << " because "
+                  << e.what()
+                  << std::endl; 
     }
 }
 
