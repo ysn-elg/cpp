@@ -1,5 +1,5 @@
-#ifndef   FORM_HPP
-# define  FORM_HPP
+#ifndef A_FORM_HPP
+#define A_FORM_HPP
 
 # include <string>
 # include <ostream>

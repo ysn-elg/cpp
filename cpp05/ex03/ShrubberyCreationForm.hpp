@@ -1,5 +1,5 @@
-#ifndef   SHRUBBERYCREATIONFORM_HPP
-# define  SHRUBBERYCREATIONFORM_HPP
+#ifndef SHRUBBERY_CREATION_FORM_HPP
+#define SHRUBBERY_CREATION_FORM_HPP
 
 # include "AForm.hpp"
 # include <string>
