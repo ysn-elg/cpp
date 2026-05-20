@@ -55,4 +55,3 @@ std::ostream& operator<<(std::ostream& os, Form& obj) {
        << "grade to execute: "  << obj.getGradeToExecute();
     return os;
 }
-

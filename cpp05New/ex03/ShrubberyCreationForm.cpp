@@ -1,0 +1,54 @@
+#include "ShrubberyCreationForm.hpp"
+#include "AForm.hpp"
+#include <stdexcept>
+#include <fstream>
+#include <string>
+
+ShrubberyCreationForm::ShrubberyCreationForm()
+        : AForm("ShrubberyCreationForm", 145, 137), _target("x") {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
+        : AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
+            : AForm(other), _target(other._target) {}
+
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
+{
+    if (this != &other)
+        _target = other._target;
+    return *this;
+}
+
+void ShrubberyCreationForm::beExecuted() const {
+    std::ofstream outFile((_target + "_shrubbery").c_str());
+    if (!outFile.is_open())
+        throw std::runtime_error("Failed to open shrubbery file");
+
+    outFile <<
+        "                     / / /                                         \n"
+        "                   /        /  /     //    /                       \n"
+        "                /                 /         /  /                   \n"
+        "                                /                                  \n"
+        "                         @O@   /       @        //                 \n"
+        "               /         O/O          @/@             /            \n"
+        "               /         O $'/,        /               /           \n"
+        "               /              'b      *o                           \n"
+        "                /              '$    //                //          \n"
+        "               /    /           $:   /:               /            \n"
+        "             //      /  //      */  #):      ()/   / /             \n"
+        "                          /     :#,#):   ,/**:'   /                \n"
+        "              /      @/,@       :##*: //**'      /   /             \n"
+        "                       '/o/    /:(#'/#*  @/O                       \n"
+        "               /  /       'bq,//:,##*'   O,*@    / /               \n"
+        "                          ,p$q8,:#)'  /p*'      /                  \n"
+        "                   /     '  / '##pp##*'    /  /                    \n"
+        "                    /  / //    y7'.'     /  /                      \n"
+        "                              :#):.                                \n"
+        "                             .:#:'.                                \n"
+        "                           .::(#:.                                 \n";
+
+    outFile.close();
+}
