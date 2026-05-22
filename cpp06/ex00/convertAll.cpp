@@ -1,6 +1,3 @@
-// TODO: check some example about nan and nanf (non a number (float)).
-
-#include "ScalarConverter.hpp"
 #include "Types.hpp"
 #include <iostream>
 #include <cstdlib>
@@ -10,23 +7,24 @@
 static resultValues convertToActualType(const std::string& input, Type type)
 {
     resultValues V;
-    if (type == TYPE_CHAR)    V.c = input[0];
-    else if (type == TYPE_INT)     V.i = std::strtol(input.c_str(), NULL, 10); // TODO: overflow case 
-    else if (type == TYPE_FLOAT)   V.f = std::strtof(input.c_str(), NULL);
-    else if (type == TYPE_DOUBLE)  V.d = std::strtod(input.c_str(), NULL);
-    else if (type == TYPE_SPECIAL) {
+    if      (type == TYPE_CHAR)     V.c = input[0];
+    else if (type == TYPE_INT)      V.i = std::strtol(input.c_str(), NULL, 10); 
+    else if (type == TYPE_FLOAT)    V.f = std::strtof(input.c_str(), NULL);
+    else if (type == TYPE_DOUBLE)   V.d = std::strtod(input.c_str(), NULL);
+    else if (type == TYPE_SPECIAL)
+    {
         if (input == "nan" || input == "nanf")
             V.d = std::numeric_limits<double>::quiet_NaN();
         else if (input[0] == '-')
             V.d = -std::numeric_limits<double>::infinity();
         else
             V.d = std::numeric_limits<double>::infinity();
-    return V;
+        return V;
     }
     return V;
 }
 
-static void convertRestOfTypes(resultValues& V, Type type) // TODO: polymorphism!
+static void convertRestOfTypes(resultValues& V, Type type)
 {
     if (type == TYPE_CHAR) {
         V.i = static_cast<int>(V.c);

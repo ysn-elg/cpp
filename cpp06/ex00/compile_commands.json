@@ -1,0 +1,82 @@
+[
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "detectType.cpp",
+   "-o",
+   "objs/detectType.o"
+  ],
+  "file": "detectType.cpp"
+ },
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "main.cpp",
+   "-o",
+   "objs/main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "print.cpp",
+   "-o",
+   "objs/print.o"
+  ],
+  "file": "print.cpp"
+ },
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "convertAll.cpp",
+   "-o",
+   "objs/convertAll.o"
+  ],
+  "file": "convertAll.cpp"
+ },
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "ScalarConverter.cpp",
+   "-o",
+   "objs/ScalarConverter.o"
+  ],
+  "file": "ScalarConverter.cpp"
+ }
+]

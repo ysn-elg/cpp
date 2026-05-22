@@ -1,6 +1,8 @@
 #ifndef   TYPES_HPP
 # define  TYPES_HPP
 
+#include <string>
+
 enum Type {
     TYPE_CHAR,
     TYPE_INT,

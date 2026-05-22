@@ -1,8 +1,7 @@
-#include "ScalarConverter.hpp"
 #include "Types.hpp"
+#include <iostream>
 #include <limits>
 #include <cstdlib>
-#include <iostream>
 
 static bool isSpecial(const std::string& input) {
     return (input == "nan"  || input == "nanf" ||

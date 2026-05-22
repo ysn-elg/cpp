@@ -1,4 +1,3 @@
-#include "ScalarConverter.hpp"
 #include "Types.hpp"
 #include <iostream>
 #include <cmath>

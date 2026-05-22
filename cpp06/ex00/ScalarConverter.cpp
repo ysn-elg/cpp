@@ -1,7 +1,7 @@
 #include "ScalarConverter.hpp"
 #include "Types.hpp"
 
-ScalarConverter::ScalarConverter() // private constructor? read more.
+ScalarConverter::ScalarConverter()
 {
 }
 
