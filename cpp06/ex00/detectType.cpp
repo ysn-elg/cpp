@@ -1,5 +1,4 @@
 #include "Types.hpp"
-#include <iostream>
 #include <limits>
 #include <cstdlib>
 
@@ -20,8 +19,6 @@ Type detection(const std::string& input) {
     size_t i = 0;
     if (input[0] == '+' || input[0] == '-')
         i++;
-    if (i == input.length())
-        return TYPE_INVALID;
     for(; i < input.length(); i++) {
         if (std::isdigit(input[i]))
             continue ;

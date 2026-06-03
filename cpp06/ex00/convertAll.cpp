@@ -1,5 +1,4 @@
 #include "Types.hpp"
-#include <iostream>
 #include <cstdlib>
 #include <limits>
 
@@ -8,7 +7,7 @@ static resultValues convertToActualType(const std::string& input, Type type)
 {
     resultValues V;
     if      (type == TYPE_CHAR)     V.c = input[0];
-    else if (type == TYPE_INT)      V.i = std::strtol(input.c_str(), NULL, 10); 
+    else if (type == TYPE_INT)      V.i = static_cast<int>(std::strtol(input.c_str(), NULL, 10)); 
     else if (type == TYPE_FLOAT)    V.f = std::strtof(input.c_str(), NULL);
     else if (type == TYPE_DOUBLE)   V.d = std::strtod(input.c_str(), NULL);
     else if (type == TYPE_SPECIAL)

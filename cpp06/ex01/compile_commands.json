@@ -1,0 +1,50 @@
+[
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "Data.cpp",
+   "-o",
+   "objs/Data.o"
+  ],
+  "file": "Data.cpp"
+ },
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "main.cpp",
+   "-o",
+   "objs/main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/yel-guad/Desktop/cpp/cpp06/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-g",
+   "-c",
+   "Serializer.cpp",
+   "-o",
+   "objs/Serializer.o"
+  ],
+  "file": "Serializer.cpp"
+ }
+]
