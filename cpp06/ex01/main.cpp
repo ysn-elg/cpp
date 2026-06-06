@@ -1,14 +1,13 @@
 #include <iostream>
 #include "Serializer.hpp"
 #include "Data.hpp"
-
 #include <stdint.h>
 
 int main()
 {
     Data d;
     d.value = 1337;
-
+    
     uintptr_t raw = Serializer::serialize(&d);
     std::cout << "serialized pointer: " << raw << std::endl;
 

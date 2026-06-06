@@ -1,6 +1,6 @@
 #include <iostream>
-#include <cstdlib>   // for rand()
-#include <ctime>     // for time()
+#include <cstdlib>
+#include <ctime>
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
@@ -11,6 +11,7 @@ Base::~Base()
 }
 
 Base * generate(void) {
+    std::srand(std::time(0));
     int r = std::rand() % 3;
     if (r == 0)
         return new A();

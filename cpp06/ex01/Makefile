@@ -3,7 +3,7 @@ NAME		= Serialization
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS		= Data.cpp  main.cpp  Serializer.cpp
+SRCS		= main.cpp  Serializer.cpp
 
 OBJ_DIR		= objs
 OBJS		= $(addprefix $(OBJ_DIR)/,$(SRCS:.cpp=.o))
