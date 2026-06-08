@@ -12,7 +12,6 @@ public:
     Array() : _n(0), array(new T[0]()) {}
     Array(unsigned int n) : _n(n), array(new T[_n]()) { }
     Array(const Array &other) : _n(other._n), array(new T[other._n]()) {
-        // array = new T[_n];
         for (unsigned int i = 0; i < _n; i++)
             array[i] = other.array[i];
     }
