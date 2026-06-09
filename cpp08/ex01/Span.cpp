@@ -4,10 +4,7 @@
 
 Span::Span() : _maxSize(0) { }
 Span::Span(unsigned int maxSize) : _maxSize(maxSize) { }
-Span::Span(const Span& other) : _maxSize(other._maxSize), V(other.V)
-{
-    (void)other;
-}
+Span::Span(const Span& other) : _maxSize(other._maxSize), V(other.V) { (void)other; }
 
 Span &Span::operator=(const Span& other) {
     if (this != &other) {

@@ -16,8 +16,22 @@ public:
     Span &operator=(const Span& other);
 
     void addNumber(int num);
+
+    template <typename It>
+    void addNumbers(It begin, It end);
+
     long shortestSpan() const;
     long longestSpan() const;
 };
+
+template <typename It>
+void Span::addNumbers(It begin, It end)
+{
+    while (begin != end)
+    {
+        addNumber(*begin);
+        ++begin;
+    }
+}
 
 #endif
