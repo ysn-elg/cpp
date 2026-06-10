@@ -1,8 +1,8 @@
-#ifndef MUTANT_STACK_HPP
-#define MUTANT_STACK_HPP
+#ifndef TEST_HPP
+#define TEST_HPP
 
-# include <deque>
 # include <stack>
+# include <deque>
 
 template <typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container> {
@@ -17,7 +17,7 @@ public:
     ~MutantStack();
 
     MutantStack &operator=(const MutantStack& other);
-    
+
     iterator        begin();
     const_iterator  begin() const;
 
@@ -30,7 +30,5 @@ public:
     reverse_iterator        rend();
     const_reverse_iterator  rend() const;
 };
-
-#include "MutantStack.tpp"
 
 #endif
