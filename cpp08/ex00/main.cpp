@@ -18,9 +18,9 @@ int main() {
 
         std::cout << "Found in list: " << *easyfind(l, 15) << std::endl;
 
-        // This will throw
         std::cout << *easyfind(v, 99) << std::endl;
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << std::endl;
     }
 
