@@ -106,7 +106,7 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr, int left, int right) {
             pairs.push_back(std::make_pair(b, a));
     }
     int oddElement = -1;
-    if (i == right)
+    if (right % 2)
         oddElement = arr[right];
 
     std::vector<int> larger;
@@ -119,9 +119,54 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr, int left, int right) {
     if (larger.size() > 1)
         mergeInsertSort(larger, 0, larger.size() - 1);
 
-    std::vector<int> mainChain = larger;
+    std::vector<std::pair<int, int> > sortedPairs;
+    std::vector<bool> used(pairs.size(), false);
+    
+    for (size_t i = 0; i < larger.size(); i++) {
+        for (size_t j = 0; j < pairs.size(); j++) {
+            if (!used[j] && larger[i] == pairs[j].second) {
+                sortedPairs.push_back(pairs[j]);
+                used[j] = true;
+                break;
+            }
+        }
+    }
+    
+    std::vector<std::size_t> jacobsthalOrder = generateJacobsthal(larger.size());
 
-    for (std::size_t i = 0; i < pairs.size(); ++i)
+    std::vector<int> result = larger;
+    
+    for (std::size_t i = 0; i < jacobsthalOrder.size(); ++i) {
+        std::size_t idx = jacobsthalOrder[i];
+        if (idx < sortedPairs.size())
+            binaryInsert(result, sortedPairs[idx].first);
+    }
+
+}
+
+std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) { // TODO: if n != jacobsthal[i]
+    if (n == 0)
+        return std::vector<std::size_t>();
+
+    std::vector<std::size_t> jacobsthal;
+
+    jacobsthal.push_back(0);
+    jacobsthal.push_back(1);
+
+    while (jacobsthal.back() < n) {
+        std::size_t next = jacobsthal[jacobsthal.size() - 1] +
+                            2 * jacobsthal[jacobsthal.size() - 2];
+        jacobsthal.push_back(next);
+    }
+
+    std::vector<std::size_t> order;
+
+    for (std::size_t i = 0; i < jacobsthal.size(); ++i) {
+        if (jacobsthal[i] < n)
+            for (std::size_t j = jacobsthal[i]; j > jacobsthal[i - 1]; --j)
+                order.push_back(j);
+    }
+    return order;
 }
 
 void PmergeMe::run(int ac, char** av) {
