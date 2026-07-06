@@ -1,6 +1,7 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
 #include <bits/types/struct_timeval.h>
+#include <cassert>
 #include <cctype>
 #include <cstddef>
 #include <cstdlib>
@@ -86,14 +87,14 @@ void PmergeMe::displayAfter() const {
 //     }
 //     std::cout << std::endl;
 // }
-// static void printResult(std::vector<int> result) {
-//
-//     std::cout << "result: ";
-//     for (std::size_t i = 0; i < result.size(); ++i) {
-//         std::cout << result[i] << ((i != result.size() - 1) ? ", " : "");
-//     }
-//     std::cout << std::endl;
-// }
+static void printResult(std::vector<int> result) {
+
+    std::cout << "result: ";
+    for (std::size_t i = 0; i < result.size(); ++i) {
+        std::cout << result[i] << ((i != result.size() - 1) ? ", " : "");
+    }
+    std::cout << std::endl;
+}
 // static void printJacobsthal(std::vector<std::size_t> jacobsthalOrder) {
 //
 //     // ----jacobsthal
@@ -170,8 +171,12 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
         std::vector<int>::iterator it = 
                         std::find(result.begin(), result.end(), larger[idx - 1]);
         std::size_t maxPos = std::distance(result.begin(), it);
-        if (idx < pending.size() + 1) // not need to by handled
-            binaryInsert(result, pending[idx - 1], maxPos + 1);
+        std::vector<int>::iterator pos =
+                                std::lower_bound(result.begin(),
+                                result.begin() + maxPos + 1,
+                                pending[idx - 1]);
+
+        result.insert(pos, pending[idx - 1]);
     }
     if (oddElement != -1)
         binaryInsert(result, oddElement, result.size());
@@ -181,19 +186,24 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
 // insert 4 to [1 2 3 7 9] maxPos = 3 
 // [1 2 3 4 5 6 7 8 9 10 12]   [1 3 5 7 9 11],   value = 11, maxPos = 11;
 void PmergeMe::binaryInsert(std::vector<int> &arr, int value, std::size_t maxPos) {
-    // std::size_t left = 0;
     int left = 0;
     int right = static_cast<int>(maxPos);
-    while (left < right) {
-        std::size_t mid = left + (right - left) / 2; // 1; 2; 2; 
+    while (left <= right) { // problem between <= and <
+        int mid = left + (right - left) / 2; // 5; 5; 4;
 
         if (value < arr[mid]) { // 
-            right = mid - 1; // 3; 3; 3;
+            right = mid - 1; // 10; 9;
         }
         else
-            left = mid + 1; //  1; 2; 3;
+            left = mid + 1; //  0; 0;
     }
+    std::cout << "\n  insert " << value << " to : ";
+    printResult(arr);
+    std::cout << "  left = " << left
+              << " arr.size() = " << arr.size() << std::endl;
+    // std::cout << "  After : ";
     arr.insert(arr.begin() + left, value);
+    printResult(arr);
 }
 
 std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) { // TODO: for i = [0, 1, ...] if n != jacobsthal[i]?
