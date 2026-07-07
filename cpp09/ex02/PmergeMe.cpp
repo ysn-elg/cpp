@@ -13,18 +13,20 @@
 #include <utility>
 #include <vector>
 
-PmergeMe::PmergeMe() : counter(0) {}
+PmergeMe::PmergeMe() : _counter(0) {}
 
 
-PmergeMe::PmergeMe(const PmergeMe& other) : counter(other.counter) {
+PmergeMe::PmergeMe(const PmergeMe& other) {
     _vec = other._vec;
     _deq = other._deq;
+    _counter = other._counter;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe& other) {
     if (this != &other) {
         _vec = other._vec;
         _deq = other._deq;
+        _counter = other._counter;
     }
     return *this;
 }
@@ -134,6 +136,7 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
             pairs.push_back(std::make_pair(a, b));
         else
             pairs.push_back(std::make_pair(b, a));
+        ++counter;
     }
     int oddElement = -1;
     if (arr.size() % 2)
