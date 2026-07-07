@@ -10,6 +10,7 @@ class PmergeMe {
 private:
     std::vector<int>  _vec;
     std::deque<int>   _deq;
+    std::size_t       counter;
     
     // -- Parsing --
     bool isValidPositiveInt(const std::string& str) const;
@@ -19,7 +20,7 @@ private:
     void sortVector();
     std::vector<std::size_t> generateJacobsthal(std::size_t n);
     void mergeInsertSort(std::vector<int> &arr);
-    void binaryInsert(std::vector<int> &arr, int value, std::size_t maxPos);
+
 public:
     PmergeMe();
     PmergeMe(const PmergeMe& other);
@@ -29,6 +30,7 @@ public:
     void run(int ac, char** av);
     void displayBefore() const;
     void displayAfter() const;
+    void isSorted(const std::vector<int>& vec) const;
 };
 
 #endif
