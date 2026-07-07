@@ -87,14 +87,14 @@ void PmergeMe::displayAfter() const {
 //     }
 //     std::cout << std::endl;
 // }
-static void printResult(std::vector<int> result) {
-
-    std::cout << "result: ";
-    for (std::size_t i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << ((i != result.size() - 1) ? ", " : "");
-    }
-    std::cout << std::endl;
-}
+// static void printResult(std::vector<int> result) {
+//
+//     std::cout << "result: ";
+//     for (std::size_t i = 0; i < result.size(); ++i) {
+//         std::cout << result[i] << ((i != result.size() - 1) ? ", " : "");
+//     }
+//     std::cout << std::endl;
+// }
 // static void printJacobsthal(std::vector<std::size_t> jacobsthalOrder) {
 //
 //     // ----jacobsthal
@@ -110,7 +110,8 @@ void PmergeMe::sortVector() {
     timeval start;
     gettimeofday(&start, NULL); // TODO:
 
-    mergeInsertSort(_vec);
+    if (_vec.size() > 1)
+        mergeInsertSort(_vec);
 
     timeval end;
     gettimeofday(&end, NULL);
@@ -159,8 +160,7 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
         }
     }
             // 2 4 8 9     #2# 0 1
-    std::vector<std::size_t> jacobsthalOrder;
-    jacobsthalOrder = generateJacobsthal(larger.size());
+    std::vector<std::size_t> jacobsthalOrder = generateJacobsthal(larger.size());
 
     std::vector<int> result = larger;
   
@@ -179,7 +179,7 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
         result.insert(pos, pending[idx - 1]);
     }
     if (oddElement != -1)
-        binaryInsert(result, oddElement, result.size());
+        result.insert(result.end(), oddElement);
     arr = result;
 }
 
@@ -198,12 +198,12 @@ void PmergeMe::binaryInsert(std::vector<int> &arr, int value, std::size_t maxPos
             left = mid + 1; //  0; 0;
     }
     std::cout << "\n  insert " << value << " to : ";
-    printResult(arr);
+    // printResult(arr);
     std::cout << "  left = " << left
               << " arr.size() = " << arr.size() << std::endl;
     // std::cout << "  After : ";
     arr.insert(arr.begin() + left, value);
-    printResult(arr);
+    // printResult(arr);
 }
 
 std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) { // TODO: for i = [0, 1, ...] if n != jacobsthal[i]?
