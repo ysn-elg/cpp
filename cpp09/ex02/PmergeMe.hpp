@@ -20,6 +20,10 @@ private:
     void sortVector();
     std::vector<std::size_t> generateJacobsthal(std::size_t n);
     void mergeInsertSort(std::vector<int> &arr);
+    static bool comp(int a, int b) {
+        ++_counter;
+        return a < b;
+    }
 
 public:
     PmergeMe();

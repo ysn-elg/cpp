@@ -13,7 +13,7 @@
 #include <utility>
 #include <vector>
 
-std::size_t _counter = 0;
+std::size_t PmergeMe::_counter = 0;
 
 PmergeMe::PmergeMe() {}
 
@@ -179,7 +179,12 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
             }
         }
     }
-    std::vector<std::size_t> jacobsthalOrder = generateJacobsthal(larger.size());
+    // new
+    if (oddElement != -1)
+        pending.push_back(oddElement);
+
+    std::vector<std::size_t> jacobsthalOrder = generateJacobsthal(pending.size());
+    std::cout << "size jacobsthal = " << jacobsthalOrder.size() << "\n";
 
     std::vector<int> result = larger;
   
@@ -192,16 +197,16 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
         std::size_t maxPos = std::distance(result.begin(), it);
         std::vector<int>::iterator pos =
                                 std::lower_bound(result.begin(),
-                                result.begin() + maxPos + 1,
-                                pending[idx - 1], counter);
+                                result.begin() + maxPos,
+                                pending[idx - 1], PmergeMe::comp);
 
         result.insert(pos, pending[idx - 1]);
     }
-    if (oddElement != -1) {
-        std::vector<int>::iterator pos =
-            std::lower_bound(result.begin(), result.end(), oddElement, counter);
-        result.insert(pos, oddElement);
-    }
+    // if (oddElement != -1) {
+    //     std::vector<int>::iterator pos =
+    //         std::lower_bound(result.begin(), result.end(), oddElement, PmergeMe::comp);
+    //     result.insert(pos, oddElement);
+    // }
     arr = result;
 }
 
