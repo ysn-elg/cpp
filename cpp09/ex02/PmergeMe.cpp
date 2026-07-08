@@ -13,20 +13,22 @@
 #include <utility>
 #include <vector>
 
-PmergeMe::PmergeMe() : _counter(0) {}
+std::size_t _counter = 0;
+
+PmergeMe::PmergeMe() {}
 
 
 PmergeMe::PmergeMe(const PmergeMe& other) {
     _vec = other._vec;
     _deq = other._deq;
-    _counter = other._counter;
+    // _counter = other._counter;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe& other) {
     if (this != &other) {
         _vec = other._vec;
         _deq = other._deq;
-        _counter = other._counter;
+        // _counter = other._counter;
     }
     return *this;
 }
@@ -108,21 +110,34 @@ void PmergeMe::displayAfter() const {
 // }
 // ------------------- end -----------------------
 
-void PmergeMe::sortVector() {
-    timeval start;
-    gettimeofday(&start, NULL); // TODO:
 
-    if (_vec.size() > 1)
-        mergeInsertSort(_vec);
+std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) {
+    if (n == 0)
+        return std::vector<std::size_t>();
 
-    timeval end;
-    gettimeofday(&end, NULL);
+    std::vector<std::size_t> jacobsthal;
 
-    long duration = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
-    
-    std::cout << "Time to process a range of " << _vec.size() 
-              << " elements with std::vector : " << duration 
-              << " us" << std::endl;
+    jacobsthal.push_back(0);
+    jacobsthal.push_back(1);
+
+    while (jacobsthal.back() < n) {
+        std::size_t next = jacobsthal[jacobsthal.size() - 1] +
+                            2 * jacobsthal[jacobsthal.size() - 2];
+        jacobsthal.push_back(next);
+    }
+    if (jacobsthal.back() != n)
+        jacobsthal.back() = n;
+    // printJacobsthal("jacobsthal", jacobsthal); // 0, 1, 1, 3, 5, 11 ..
+
+    std::vector<std::size_t> order;
+    order.push_back(1);
+
+    for (std::size_t i = 3; i < jacobsthal.size(); ++i) {
+        for (std::size_t j = jacobsthal[i]; j > jacobsthal[i - 1]; --j)
+            order.push_back(j);
+    }
+    // printJacobsthal(order);
+    return order;
 }
 
 void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
@@ -136,7 +151,7 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
             pairs.push_back(std::make_pair(a, b));
         else
             pairs.push_back(std::make_pair(b, a));
-        ++counter;
+        ++_counter;
     }
     int oddElement = -1;
     if (arr.size() % 2)
@@ -178,46 +193,33 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
         std::vector<int>::iterator pos =
                                 std::lower_bound(result.begin(),
                                 result.begin() + maxPos + 1,
-                                pending[idx - 1]);
+                                pending[idx - 1], counter);
 
         result.insert(pos, pending[idx - 1]);
     }
     if (oddElement != -1) {
         std::vector<int>::iterator pos =
-            std::lower_bound(result.begin(), result.end(), oddElement);
+            std::lower_bound(result.begin(), result.end(), oddElement, counter);
         result.insert(pos, oddElement);
     }
     arr = result;
 }
 
+void PmergeMe::sortVector() {
+    timeval start;
+    gettimeofday(&start, NULL); // TODO:
 
-std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) { // TODO: for i = [0, 1, ...] if n != jacobsthal[i]?
-    if (n == 0)
-        return std::vector<std::size_t>();
+    if (_vec.size() > 1)
+        mergeInsertSort(_vec);
 
-    std::vector<std::size_t> jacobsthal;
+    timeval end;
+    gettimeofday(&end, NULL);
 
-    jacobsthal.push_back(0);
-    jacobsthal.push_back(1);
-
-    while (jacobsthal.back() < n) {
-        std::size_t next = jacobsthal[jacobsthal.size() - 1] +
-                            2 * jacobsthal[jacobsthal.size() - 2];
-        jacobsthal.push_back(next);
-    }
-    if (jacobsthal.back() != n)
-        jacobsthal.back() = n;
-    // printJacobsthal("jacobsthal", jacobsthal); // 0, 1, 1, 3, 5, 11 ..
-
-    std::vector<std::size_t> order;
-    order.push_back(1);
-
-    for (std::size_t i = 3; i < jacobsthal.size(); ++i) {
-        for (std::size_t j = jacobsthal[i]; j > jacobsthal[i - 1]; --j)
-            order.push_back(j);
-    }
-    // printJacobsthal(order);
-    return order;
+    long duration = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+    
+    std::cout << "Time to process a range of " << _vec.size() 
+              << " elements with std::vector : " << duration 
+              << " us" << std::endl;
 }
 
 void PmergeMe::run(int ac, char** av) {
@@ -240,5 +242,6 @@ void PmergeMe::isSorted(const std::vector<int>& vec) const
             return;
         }
     }
-    std::cout << "Sorted\n";
+    std::cout << "Sorted\n"
+              << "counter = " << _counter << "\n";
 }

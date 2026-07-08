@@ -10,7 +10,7 @@ class PmergeMe {
 private:
     std::vector<int>  _vec;
     std::deque<int>   _deq;
-    std::size_t       _counter;
+    static std::size_t       _counter;
     
     // -- Parsing --
     bool isValidPositiveInt(const std::string& str) const;
@@ -31,6 +31,9 @@ public:
     void displayBefore() const;
     void displayAfter() const;
     void isSorted(const std::vector<int>& vec) const;
+    static void counter() {
+        ++_counter;
+    }
 };
 
 #endif
