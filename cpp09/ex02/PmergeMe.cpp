@@ -81,36 +81,6 @@ void PmergeMe::displayAfter() const {
     std::cout << std::endl;
 }
 
-// ---------------- debugging -------------------
-// static void printJacobsthal(std::string vecname, std::vector<std::size_t> jacobsthalOrder) {
-//
-//     // ----jacobsthal
-//     std::cout << vecname << ": ";
-//     for (std::size_t i = 0; i < jacobsthalOrder.size(); ++i) {
-//         std::cout << jacobsthalOrder[i] << ((i != jacobsthalOrder.size() - 1) ? ", " : "");
-//     }
-//     std::cout << std::endl;
-// }
-// static void printResult(std::vector<int> result) {
-//
-//     std::cout << "result: ";
-//     for (std::size_t i = 0; i < result.size(); ++i) {
-//         std::cout << result[i] << ((i != result.size() - 1) ? ", " : "");
-//     }
-//     std::cout << std::endl;
-// }
-// static void printJacobsthal(std::vector<std::size_t> jacobsthalOrder) {
-//
-//     // ----jacobsthal
-//     std::cout << "vec : ";
-//     for (std::size_t i = 0; i < jacobsthalOrder.size(); ++i) {
-//         std::cout << jacobsthalOrder[i] << ((i != jacobsthalOrder.size() - 1) ? ", " : "");
-//     }
-//     std::cout << std::endl;
-// }
-// ------------------- end -----------------------
-
-
 std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) {
     if (n == 0)
         return std::vector<std::size_t>();
@@ -127,7 +97,6 @@ std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) {
     }
     if (jacobsthal.back() != n)
         jacobsthal.back() = n;
-    // printJacobsthal("jacobsthal", jacobsthal); // 0, 1, 1, 3, 5, 11 ..
 
     std::vector<std::size_t> order;
     order.push_back(1);
@@ -136,11 +105,12 @@ std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) {
         for (std::size_t j = jacobsthal[i]; j > jacobsthal[i - 1]; --j)
             order.push_back(j);
     }
-    // printJacobsthal(order);
     return order;
 }
 
-void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
+// -------------------------------------------------------------
+
+void PmergeMe::mergeInsertSortVector(std::vector<int> &arr) {
     std::vector<std::pair<int, int> > pairs;
 
     for (std::size_t i = 0; i + 1 < arr.size(); i += 2) { // func
@@ -162,15 +132,13 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
     for (std::size_t i = 0; i < pairs.size(); ++i)
         larger.push_back(pairs[i].second);
     
-    // if (larger.size() > 1)
-    //     mergeInsertSort(larger);
     if (larger.size() > 1)
-        mergeInsertSort(larger);
+        mergeInsertSortVector(larger);
 
     std::vector<int> pending;
     std::vector<bool> used(pairs.size(), false);
     
-    for (size_t i = 0; i < larger.size(); i++) {
+    for (size_t i = 0; i < larger.size(); i++) { // TODO:
         for (size_t j = 0; j < pairs.size(); j++) {
             if (!used[j] && larger[i] == pairs[j].second) {
                 pending.push_back(pairs[j].first);
@@ -179,21 +147,24 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
             }
         }
     }
-    // new
-    if (oddElement != -1)
-        pending.push_back(oddElement);
 
     std::vector<std::size_t> jacobsthalOrder = generateJacobsthal(pending.size());
-    std::cout << "size jacobsthal = " << jacobsthalOrder.size() << "\n";
 
     std::vector<int> result = larger;
-  
     result.insert(result.begin(), pending[0]);
+
+    if (oddElement != -1) {
+        std::vector<int>::iterator pos =
+            std::lower_bound(result.begin(), result.end(), oddElement, PmergeMe::comp);
+        result.insert(pos, oddElement);
+    }
+
     for (std::size_t i = 1; i < jacobsthalOrder.size(); ++i)
     {
         std::size_t idx = jacobsthalOrder[i];
-        std::vector<int>::iterator it = 
-                        std::find(result.begin(), result.end(), larger[idx - 1]);
+
+        std::vector<int>::iterator it =
+                    std::find(result.begin(), result.end(), larger[idx - 1]);
         std::size_t maxPos = std::distance(result.begin(), it);
         std::vector<int>::iterator pos =
                                 std::lower_bound(result.begin(),
@@ -202,11 +173,7 @@ void PmergeMe::mergeInsertSort(std::vector<int> &arr) {
 
         result.insert(pos, pending[idx - 1]);
     }
-    // if (oddElement != -1) {
-    //     std::vector<int>::iterator pos =
-    //         std::lower_bound(result.begin(), result.end(), oddElement, PmergeMe::comp);
-    //     result.insert(pos, oddElement);
-    // }
+
     arr = result;
 }
 
@@ -215,26 +182,42 @@ void PmergeMe::sortVector() {
     gettimeofday(&start, NULL); // TODO:
 
     if (_vec.size() > 1)
-        mergeInsertSort(_vec);
+        mergeInsertSortVector(_vec);
 
     timeval end;
     gettimeofday(&end, NULL);
 
-    long duration = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
-    
+    _timeToSortVector = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+}
+
+// void PmergeMe::sortDeque() {
+//     timeval start;
+//     gettimeofday(&start, NULL); // TODO:
+//
+//     if (_vec.size() > 1)
+//         mergeInsertSortDeque(_vec);
+//
+//     timeval end;
+//     gettimeofday(&end, NULL);
+//
+//     _timeToSortDeque = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+// }
+
+void PmergeMe::displayTime() const {
     std::cout << "Time to process a range of " << _vec.size() 
-              << " elements with std::vector : " << duration 
+              << " elements with std::vector : " << _timeToSortVector 
               << " us" << std::endl;
 }
 
 void PmergeMe::run(int ac, char** av) {
     parseArguments(ac, av);
+
     displayBefore();
-    
     sortVector();
-    // TODO: sort using algo ...
+    // sortDeque();
     displayAfter();
-    // debugging
+
+    displayTime();
     isSorted(_vec);
 }
 

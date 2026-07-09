@@ -10,6 +10,8 @@ class PmergeMe {
 private:
     std::vector<int>  _vec;
     std::deque<int>   _deq;
+    long              _timeToSortVector;
+    // long              _timeToSortDeque;
     static std::size_t       _counter;
     
     // -- Parsing --
@@ -19,7 +21,9 @@ private:
     // -- Vector sorting --
     void sortVector();
     std::vector<std::size_t> generateJacobsthal(std::size_t n);
-    void mergeInsertSort(std::vector<int> &arr);
+    void mergeInsertSortVector(std::vector<int> &arr);
+
+    // -- Compare + Counter -- 
     static bool comp(int a, int b) {
         ++_counter;
         return a < b;
@@ -34,10 +38,12 @@ public:
     void run(int ac, char** av);
     void displayBefore() const;
     void displayAfter() const;
+    void displayTime() const;
+
     void isSorted(const std::vector<int>& vec) const;
-    static void counter() {
-        ++_counter;
-    }
+    // static void counter() {
+    //     ++_counter;
+    // }
 };
 
 #endif
