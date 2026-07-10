@@ -9,7 +9,6 @@
 #include <deque>
 #include <iomanip>
 #include <iostream>
-#include <iterator>
 #include <ostream>
 #include <string>
 #include <sys/time.h>
@@ -105,7 +104,7 @@ void PmergeMe::isSorted() const
         }
     }
     std::cout << "Sorted\n"
-              << "Deque counter = " << _counter << "\n";
+              << "Counter = " << _counter << "\n";
 }
 
 // -- Jacobsthal --
@@ -306,7 +305,7 @@ void PmergeMe::displayTime() const
 {
     std::cout << std::fixed << std::setprecision(5)
           << "Time to process a range of " << _vec.size()
-          << " elements with std::deque : "
+          << " elements with std::vector : "
           << _timeToSortVector << " us"
           << std::endl;
 
@@ -321,8 +320,8 @@ void PmergeMe::displayTime() const
 void PmergeMe::run(int ac, char** av) {
     parseArguments(ac, av);
     displayBefore();
-    sortVector();
     sortDeque();
+    sortVector();
     displayAfter();
     displayTime();
 }

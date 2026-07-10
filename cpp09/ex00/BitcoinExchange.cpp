@@ -5,7 +5,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include <algorithm>
 
 BitcoinExchange::BitcoinExchange() {}
 
@@ -26,6 +25,8 @@ void BitcoinExchange::loadDatabase(const std::string &databaseFile) {
 
     std::string line;
     std::getline(file, line);
+    if (line != "date,exchange_rate")
+        throw std::runtime_error("header of data.csv should be \'date,exchange_rate\'");
     while (std::getline(file, line)) {
         std::size_t pos = line.find(',');
         if (pos != std::string::npos) {
@@ -45,6 +46,8 @@ void BitcoinExchange::processInput(const std::string &inputFile) {
 
     std::string line;
     std::getline(file, line);
+    if (line != "date | value")
+        throw std::runtime_error("header of <input file> should be \'date | value\'");
     while (std::getline(file, line)) {
         if (line.empty()) continue;
 
@@ -83,7 +86,7 @@ bool isLeapYear(int year) {
 }
 
 bool BitcoinExchange::isValidDate(const std::string& date) const {
-    if (date.length()!= 10 || date[4] != '-' || date[7] != '-')
+    if (date.length() != 10 || date[4] != '-' || date[7] != '-')
         return false;
     int year  = std::atoi(date.substr(0, 4).c_str());
     int month = std::atoi(date.substr(5, 2).c_str());

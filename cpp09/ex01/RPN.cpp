@@ -59,7 +59,6 @@ int RPN::evaluate(const std::string &expression) {
     std::string token;
     
     while (iss >> token) {
-        // std::cout << "token = " << token << std::endl; // for debugging
         if (token.length() > 1)
             throw std::runtime_error("Error");
         if (std::isdigit(token[0]))
