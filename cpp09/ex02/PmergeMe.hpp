@@ -10,10 +10,9 @@ class PmergeMe {
 private:
     std::vector<int>  _vec;
     std::deque<int>   _deq;
-    long              _timeToSortVector;
-    long              _timeToSortDeque;
+    double              _timeToSortVector;
+    double              _timeToSortDeque;
     static std::size_t       _counter;
-    std::size_t       _n;
     
     // -- Parsing --
     bool isValidPositiveInt(const std::string& str) const;
@@ -39,10 +38,7 @@ private:
     void displayTime() const;
 
     // -- Compare & Counter -- 
-    static bool comp(int a, int b) {
-        ++_counter;
-        return a < b;
-    }
+    static bool comp(int a, int b);
 
 public:
     PmergeMe();

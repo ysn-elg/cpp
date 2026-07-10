@@ -5,7 +5,9 @@
 #include <cctype>
 #include <cstddef>
 #include <cstdlib>
+#include <ctime>
 #include <deque>
+#include <iomanip>
 #include <iostream>
 #include <iterator>
 #include <ostream>
@@ -18,18 +20,15 @@ std::size_t PmergeMe::_counter = 0;
 
 PmergeMe::PmergeMe() {}
 
-
 PmergeMe::PmergeMe(const PmergeMe& other) {
     _vec = other._vec;
     _deq = other._deq;
-    // _counter = other._counter;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe& other) {
     if (this != &other) {
         _vec = other._vec;
         _deq = other._deq;
-        // _counter = other._counter;
     }
     return *this;
 }
@@ -62,7 +61,7 @@ void PmergeMe::parseArguments(int ac, char** av) {
     }
 }
 
-void PmergeMe::displayBefore() const { // both
+void PmergeMe::displayBefore() const {
     std::cout << "Before: ";
     for (std::size_t i = 0; i < _vec.size(); ++i) {
         std::cout << _vec[i];
@@ -83,6 +82,33 @@ void PmergeMe::displayAfter() const {
 }
 
 // --- parsing end ---
+
+bool PmergeMe::comp(int a, int b) {
+        ++_counter;
+        return a < b;
+}
+
+void PmergeMe::isSorted() const
+{
+    for (std::size_t i = 1; i < _vec.size(); ++i)
+    {
+        if (_vec[i - 1] > _vec[i]) {
+                std::cout << "(vec) Not Sorted\n";
+            return;
+        }
+    }
+    for (std::size_t i = 1; i < _deq.size(); ++i)
+    {
+        if (_deq[i - 1] > _deq[i]) {
+                std::cout << "(deq) Not Sorted\n";
+            return;
+        }
+    }
+    std::cout << "Sorted\n"
+              << "Deque counter = " << _counter << "\n";
+}
+
+// -- Jacobsthal --
 
 std::vector<std::size_t> PmergeMe::generateJacobsthal(std::size_t n) {
     if (n == 0)
@@ -242,72 +268,61 @@ void PmergeMe::mergeInsertSortVector(std::vector<int> &arr) {
     arr = larger;
 }
 
-void PmergeMe::sortVector() {
-    timeval start;
-    gettimeofday(&start, NULL); // TODO:
+void PmergeMe::sortVector()
+{
+    timespec start;
+    clock_gettime(CLOCK_REALTIME, &start);
 
     if (_vec.size() > 1)
         mergeInsertSortVector(_vec);
 
-    timeval end;
-    gettimeofday(&end, NULL);
-
-    _timeToSortVector = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+    timespec end;
+    clock_gettime(CLOCK_REALTIME, &end);
+ 
+    _timeToSortVector =
+            (end.tv_sec - start.tv_sec) * 1000000.0 +
+            (end.tv_nsec - start.tv_nsec) / 1000.0;
+    _counter = 0;
 }
 
-void PmergeMe::sortDeque() {
-    timeval start;
-    gettimeofday(&start, NULL); // TODO:
+void PmergeMe::sortDeque()
+{
+    timespec start;
+    clock_gettime(CLOCK_REALTIME, &start);
 
-    if (_vec.size() > 1)
+    if (_deq.size() > 1)
         mergeInsertSortDeque(_deq);
 
-    timeval end;
-    gettimeofday(&end, NULL);
-
-    _timeToSortDeque = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+    timespec end;
+    clock_gettime(CLOCK_REALTIME, &end);
+    
+    _timeToSortDeque =
+            (end.tv_sec - start.tv_sec) * 1000000.0 +
+            (end.tv_nsec - start.tv_nsec) / 1000.0;
 }
+
 
 void PmergeMe::displayTime() const
 {
-    std::cout << "Time to process a range of " << _vec.size() 
-              << " elements with std::vector : " << _timeToSortVector 
-              << " us" << std::endl;
+    std::cout << std::fixed << std::setprecision(5)
+          << "Time to process a range of " << _vec.size()
+          << " elements with std::deque : "
+          << _timeToSortVector << " us"
+          << std::endl;
 
-    std::cout << "Time to process a range of " << _deq.size() 
-              << " elements with std::deque : " << _timeToSortDeque 
-              << " us" << std::endl;
+    std::cout << std::fixed << std::setprecision(5)
+          << "Time to process a range of " << _deq.size()
+          << " elements with std::deque : "
+          << _timeToSortDeque << " us"
+          << std::endl;
+
 }
 
 void PmergeMe::run(int ac, char** av) {
     parseArguments(ac, av);
     displayBefore();
     sortVector();
-    _n = _counter;
-    _counter = 0;
     sortDeque();
     displayAfter();
     displayTime();
-    isSorted();
-}
-
-void PmergeMe::isSorted() const
-{
-    for (std::size_t i = 1; i < _vec.size(); ++i)
-    {
-        if (_vec[i - 1] > _vec[i]) {
-                std::cout << "(vec) Not Sorted\n";
-            return;
-        }
-    }
-    for (std::size_t i = 1; i < _deq.size(); ++i)
-    {
-        if (_deq[i - 1] > _deq[i]) {
-                std::cout << "(deq) Not Sorted\n";
-            return;
-        }
-    }
-    std::cout << "Sorted\n"
-              << "Vector counter = " << _n << "\n"
-              << "Deque counter = " << _counter << "\n";
 }
