@@ -13,11 +13,16 @@ private:
     long              _timeToSortVector;
     long              _timeToSortDeque;
     static std::size_t       _counter;
+    std::size_t       _n;
     
     // -- Parsing --
     bool isValidPositiveInt(const std::string& str) const;
     void parseArguments(int ac, char** av);
 
+    // -- Before After --
+    void displayBefore() const;
+    void displayAfter() const;
+    
     // -- Jacobsthal --
     std::vector<std::size_t> generateJacobsthal(std::size_t n);
 
@@ -28,6 +33,10 @@ private:
     // -- Vector sorting --
     void sortDeque();
     void mergeInsertSortDeque(std::deque<int> &arr);
+
+
+    // -- Timer --
+    void displayTime() const;
 
     // -- Compare & Counter -- 
     static bool comp(int a, int b) {
@@ -42,14 +51,8 @@ public:
     ~PmergeMe();
 
     void run(int ac, char** av);
-    void displayBefore() const;
-    void displayAfter() const;
-    void displayTime() const;
 
     void isSorted() const;
-    // static void counter() {
-    //     ++_counter;
-    // }
 };
 
 #endif
